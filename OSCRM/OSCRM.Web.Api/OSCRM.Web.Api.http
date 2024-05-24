@@ -1,0 +1,6 @@
+@OSCRM.Web.Api_HostAddress = http://localhost:5217
+
+GET {{OSCRM.Web.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

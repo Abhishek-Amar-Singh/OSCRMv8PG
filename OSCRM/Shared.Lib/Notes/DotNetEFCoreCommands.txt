@@ -1,0 +1,45 @@
+**********************************************************************
+** Visual Studio 2022 Developer PowerShell v17.9.6
+** Copyright (c) 2022 Microsoft Corporation
+**********************************************************************
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM> cd .\Data.Warehouse.PostgreSQL\
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> $env:ASPNETCORE_ENVIRONMENT
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> $env:ASPNETCORE_ENVIRONMENT = "Abhishek"
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> $env:ASPNETCORE_ENVIRONMENT
+Abhishek
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> dotnet ef migrations add Category_Customer_Mig1 --context OSCRMDbContext --startup-project "C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Core.Web.App\Core.Web.App.csproj" --output-dir .\OSCRM\Migrations\ --verbose
+Could not execute because the specified command or file was not found.
+Possible reasons for this include:
+  * You misspelled a built-in dotnet command.
+  * You intended to execute a .NET program, but dotnet-ef does not exist.
+  * You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH.
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> dotnet tool install --global dotnet-ef --version 8.*
+You can invoke the tool using the following command: dotnet-ef
+Tool 'dotnet-ef' (version '8.0.5') was successfully installed.
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> dotnet ef migrations add Category_Customer_Mig1 --context OSCRMDbContext --startup-project "C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Core.Web.App\Core.Web.App.csproj" --output-dir .\OSCRM\Migrations\ --verbose
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> dotnet ef migrations remove --context OSCRMDbContext --startup-project "C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Core.Web.App\Core.Web.App.csproj" --verbose
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> dotnet ef migrations add Category_Customer_Mig1 --context OSCRMDbContext --startup-project "C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Core.Web.App\Core.Web.App.csproj" --output-dir .\OSCRM\Migrations\ --verbose
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> dotnet ef database update --context OSCRMDbContext --startup-project "C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Core.Web.App\Core.Web.App.csproj" --verbose
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> dotnet ef migrations add FillCategoryData_Mig2 --context OSCRMDbContext --startup-project "C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Core.Web.App\Core.Web.App.csproj" --verbose
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> dotnet ef database update --context OSCRMDbContext --startup-project "C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Core.Web.App\Core.Web.App.csproj" --verbose
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> dotnet ef migrations add CategoryMig1 --context RehearsalDbContext --startup-project "C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Core.Web.App\Core.Web.App.csproj" --output-dir .\Rehearsal\Migrations\ --verbose
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> dotnet ef database update --context RehearsalDbContext --startup-project "C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Core.Web.App\Core.Web.App.csproj" --verbose
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> dotnet ef migrations add InsuranceMig1 --context LakeMasterDbContext --startup-project "C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Core.Web.App\Core.Web.App.csproj" --output-dir .\LakeMaster\Migrations\ --verbose
+
+PS C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Data.Warehouse.PostgreSQL> dotnet ef database update --context LakeMasterDbContext --startup-project "C:\Abhishek\dotnet-pg\OSCRMv8\OSCRM\Core.Web.App\Core.Web.App.csproj" --verbose
+
