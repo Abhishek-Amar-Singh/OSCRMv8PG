@@ -1,4 +1,5 @@
 ﻿using DB.Models.OSCRM;
+using OSCRM.Web.Api.Models.Categories;
 using OSCRM.Web.Api.Models.Customers;
 using OSCRM.Web.Api.Storages;
 using Shared.Lib.Extensions;
@@ -16,6 +17,8 @@ namespace OSCRM.Web.Api.Services.v1.Customers
         public ValueTask<DisplayCustomer> CreateCustomerAsync(CreateCustomer dto) =>
         TryCatch(async () =>
         {
+            CustomerIsNullThrowEx(dto);
+
             Customer cust = new()
             {
                first_name = dto.first_name.ToTitleCase(),
@@ -28,6 +31,14 @@ namespace OSCRM.Web.Api.Services.v1.Customers
                pan_number =dto.pan_number.ToUpperCase()
             };
 
+            var storageCity = this._storageRepo.Select<Category>(dto.city_id);
+            CategoryIsNullThrowEx(storageCity, CategoryEnum.CITY);
+            VerifyParentCategory(storageCity!, CategoryEnum.CITY);
+
+            var storageProfession = this._storageRepo.Select<Category>(dto.profession_id);
+            CategoryIsNullThrowEx(storageProfession, CategoryEnum.PROFESSION);
+            VerifyParentCategory(storageProfession!, CategoryEnum.PROFESSION);
+
             var storageCustomer = await this._storageRepo.InsertAsync(cust);
 
             return new DisplayCustomer()
@@ -38,9 +49,9 @@ namespace OSCRM.Web.Api.Services.v1.Customers
                 last_name = storageCustomer.last_name,
                 email_address = storageCustomer.email_address,
                 mobile_number = storageCustomer.mobile_number,
-                city = this._storageRepo.Select<Category>(storageCustomer.city_id)!.name,
+                city = storageCity!.name,
                 city_id = storageCustomer.city_id,
-                profession = this._storageRepo.Select<Category>(storageCustomer.profession_id)!.name,
+                profession = storageProfession!.name,
                 profession_id = storageCustomer.profession_id,
                 pan_number = storageCustomer.pan_number,
             };

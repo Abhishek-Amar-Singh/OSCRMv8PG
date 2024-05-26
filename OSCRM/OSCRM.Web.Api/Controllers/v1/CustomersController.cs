@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using OSCRM.Web.Api.Models.Customers;
 using OSCRM.Web.Api.Services.v1.Customers;
 using Shared.Lib.Models;
+using OSCRM.Web.Api.Models.Categories.Exceptions;
 
 namespace OSCRM.Web.Api.Controllers.v1
 {
@@ -28,7 +29,8 @@ namespace OSCRM.Web.Api.Controllers.v1
                 return CreateResponse(200, storageCust);
             }
             catch (CustomerValidationException custValidationException)
-                 when (custValidationException.InnerException is NullCustomerException)
+                 when (custValidationException.InnerException is NullCustomerException
+                 or NullCategoryException or FailedToVerifyCategoryException)
             {
                 return CreateResponse(400, custValidationException.InnerException);
             }

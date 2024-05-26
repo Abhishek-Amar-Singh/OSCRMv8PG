@@ -1,4 +1,5 @@
-﻿using OSCRM.Web.Api.Models.Customers.Exceptions;
+﻿using OSCRM.Web.Api.Models.Categories.Exceptions;
+using OSCRM.Web.Api.Models.Customers.Exceptions;
 
 namespace OSCRM.Web.Api.Services.v1.Customers
 {
@@ -15,6 +16,14 @@ namespace OSCRM.Web.Api.Services.v1.Customers
             catch (NullCustomerException nullCustomerException)
             {
                 throw CreateAndLogValidationException(nullCustomerException);
+            }
+            catch (NullCategoryException nullCategoryException)
+            {
+                throw CreateAndLogValidationException(nullCategoryException);
+            }
+            catch (FailedToVerifyCategoryException failedToVerifyCategoryException)
+            {
+                throw CreateAndLogValidationException(failedToVerifyCategoryException);
             }
             catch (Exception exception)
             {
