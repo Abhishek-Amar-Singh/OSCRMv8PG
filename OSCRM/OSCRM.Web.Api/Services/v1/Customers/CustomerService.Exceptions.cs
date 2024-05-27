@@ -1,4 +1,5 @@
-﻿using OSCRM.Web.Api.Models.Categories.Exceptions;
+﻿using Npgsql;
+using OSCRM.Web.Api.Models.Categories.Exceptions;
 using OSCRM.Web.Api.Models.Customers.Exceptions;
 
 namespace OSCRM.Web.Api.Services.v1.Customers
@@ -25,6 +26,10 @@ namespace OSCRM.Web.Api.Services.v1.Customers
             {
                 throw CreateAndLogValidationException(failedToVerifyCategoryException);
             }
+            catch (NpgsqlException npgsqlException)
+            {
+                throw CreateAndLogSqlException(npgsqlException);
+            }
             catch (Exception exception)
             {
                 throw CreateAndLogServiceException(exception);
@@ -36,6 +41,13 @@ namespace OSCRM.Web.Api.Services.v1.Customers
             var customerValidationException = new CustomerValidationException(exception);
 
             return customerValidationException;
+        }
+        
+        private CustomerSqlException CreateAndLogSqlException(Exception exception)
+        {
+            var customerSqlException = new CustomerSqlException(exception);
+
+            return customerSqlException;
         }
 
         private CustomerServiceException CreateAndLogServiceException(Exception exception)
