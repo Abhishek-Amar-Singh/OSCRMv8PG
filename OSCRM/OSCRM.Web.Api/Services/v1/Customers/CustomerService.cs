@@ -33,9 +33,9 @@ namespace OSCRM.Web.Api.Services.v1.Customers
 
             ValidateCustomerPropertiesOnCreate(cust);
 
-            cust = await this._storageRepo.SelectCustomerAsync(dto.email_address);
+            var storageCust = await this._storageRepo.SelectCustomerAsync(dto.email_address);
 
-            CustomerAlreadyExistsThrowEx(cust, dto.email_address);
+            CustomerAlreadyExistsThrowEx(storageCust, dto.email_address);
 
             var storageCity = this._storageRepo.Select<Category>(dto.city_id);
             CategoryIsNullThrowEx(storageCity, CategoryEnum.CITY);
@@ -45,21 +45,21 @@ namespace OSCRM.Web.Api.Services.v1.Customers
             CategoryIsNullThrowEx(storageProfession, CategoryEnum.PROFESSION);
             VerifyParentCategory(storageProfession!, CategoryEnum.PROFESSION);
 
-            Customer storageCustomer = await this._storageRepo.InsertAsync(cust);
+            storageCust = await this._storageRepo.InsertAsync(cust);
 
             return new DisplayCustomer()
             {
-                id = storageCustomer.id,
-                first_name = storageCustomer.first_name,
-                middle_name = storageCustomer.middle_name,
-                last_name = storageCustomer.last_name,
-                email_address = storageCustomer.email_address,
-                mobile_number = storageCustomer.mobile_number,
+                id = storageCust.id,
+                first_name = storageCust.first_name,
+                middle_name = storageCust.middle_name,
+                last_name = storageCust.last_name,
+                email_address = storageCust.email_address,
+                mobile_number = storageCust.mobile_number,
                 city = storageCity!.name,
-                city_id = storageCustomer.city_id,
+                city_id = storageCust.city_id,
                 profession = storageProfession!.name,
-                profession_id = storageCustomer.profession_id,
-                pan_number = storageCustomer.pan_number,
+                profession_id = storageCust.profession_id,
+                pan_number = storageCust.pan_number,
             };
         });
 
