@@ -6,17 +6,22 @@ namespace OSCRM.Web.Api.Services.v1.Customers
 {
     public partial class CustomerService
     {
-        private delegate ValueTask<T> ReturningFunction<T>();
+        private delegate ValueTask<T> ReturningAsyncFunction<T>();
+        private delegate IQueryable<T> ReturningFunction<T>();
 
-        private async ValueTask<T> TryCatch<T>(ReturningFunction<T> returningFunction)
+        private async ValueTask<T> TryCatch<T>(ReturningAsyncFunction<T> returningAsyncFunction)
         {
             try
             {
-                return await returningFunction();
+                return await returningAsyncFunction();
             }
             catch (NullCustomerException nullCustomerException)
             {
                 throw CreateAndLogValidationException(nullCustomerException);
+            }
+            catch (AlreadyExistsCustomerException alreadyExistsCustException)
+            {
+                throw CreateAndLogValidationException(alreadyExistsCustException);
             }
             catch (NullCategoryException nullCategoryException)
             {
@@ -25,6 +30,22 @@ namespace OSCRM.Web.Api.Services.v1.Customers
             catch (FailedToVerifyCategoryException failedToVerifyCategoryException)
             {
                 throw CreateAndLogValidationException(failedToVerifyCategoryException);
+            }
+            catch (NpgsqlException npgsqlException)
+            {
+                throw CreateAndLogSqlException(npgsqlException);
+            }
+            catch (Exception exception)
+            {
+                throw CreateAndLogServiceException(exception);
+            }
+        }
+
+        private IQueryable<T> TryCatch<T>(ReturningFunction<T> returningFunction)
+        {
+            try
+            {
+                return returningFunction();
             }
             catch (NpgsqlException npgsqlException)
             {

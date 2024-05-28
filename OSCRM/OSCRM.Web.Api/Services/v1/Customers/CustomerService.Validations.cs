@@ -1,4 +1,5 @@
-﻿using OSCRM.Web.Api.Models.Categories;
+﻿using DB.Models.OSCRM;
+using OSCRM.Web.Api.Models.Categories;
 using OSCRM.Web.Api.Models.Categories.Exceptions;
 using OSCRM.Web.Api.Models.Customers;
 using OSCRM.Web.Api.Models.Customers.Exceptions;
@@ -8,6 +9,14 @@ namespace OSCRM.Web.Api.Services.v1.Customers
 {
     public partial class CustomerService
     {
+        private void CustomerAlreadyExistsThrowEx(Customer? cust, string email)
+        {
+            if (cust is not null)
+            {
+                throw new AlreadyExistsCustomerException(email);
+            }
+        }
+
         private void CustomerIsNullThrowEx(CreateCustomer dto)
         {
             if (dto is null)
