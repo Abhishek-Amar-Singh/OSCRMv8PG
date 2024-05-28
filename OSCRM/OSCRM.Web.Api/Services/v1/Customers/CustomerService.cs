@@ -19,21 +19,23 @@ namespace OSCRM.Web.Api.Services.v1.Customers
         {
             CustomerIsNullThrowEx(dto);
 
-            var cust = await this._storageRepo.SelectCustomerAsync(dto.email_address);
+            Customer? cust = new()
+            {
+                first_name = dto.first_name.ToTitleCase(),
+                middle_name = dto.middle_name is null ? null : dto.middle_name.ToTitleCase(),
+                last_name = dto.last_name.ToTitleCase(),
+                email_address = dto.email_address.ToLowerCase(),
+                mobile_number = dto.mobile_number,
+                city_id = dto.city_id,
+                profession_id = dto.profession_id,
+                pan_number = dto.pan_number.ToUpperCase()
+            };
+
+            ValidateCustomerPropertiesOnCreate(cust);
+
+            cust = await this._storageRepo.SelectCustomerAsync(dto.email_address);
 
             CustomerAlreadyExistsThrowEx(cust, dto.email_address);
-
-            cust = new()
-            {
-               first_name = dto.first_name.ToTitleCase(),
-               middle_name = dto.middle_name is null ? null : dto.middle_name.ToTitleCase(),
-               last_name = dto.last_name.ToTitleCase(),
-               email_address = dto.email_address.ToLowerCase(),
-               mobile_number = dto.mobile_number,
-               city_id = dto.city_id,
-               profession_id = dto.profession_id,
-               pan_number =dto.pan_number.ToUpperCase()
-            };
 
             var storageCity = this._storageRepo.Select<Category>(dto.city_id);
             CategoryIsNullThrowEx(storageCity, CategoryEnum.CITY);

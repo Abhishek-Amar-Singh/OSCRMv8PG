@@ -30,7 +30,7 @@ namespace OSCRM.Web.Api.Controllers.v1
             }
             catch (CustomerValidationException custValidationException)
                  when (custValidationException.InnerException is NullCustomerException
-                 or NullCategoryException or FailedToVerifyCategoryException)
+                 or NullCategoryException or FailedToVerifyCategoryException or InvalidCustomerException)
             {
                 return CreateResponse(400, custValidationException.InnerException);
             }

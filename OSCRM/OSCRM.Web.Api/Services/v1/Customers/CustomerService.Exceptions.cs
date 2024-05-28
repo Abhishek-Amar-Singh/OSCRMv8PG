@@ -15,6 +15,10 @@ namespace OSCRM.Web.Api.Services.v1.Customers
             {
                 return await returningAsyncFunction();
             }
+            catch (InvalidCustomerException invalidCustException)
+            {
+                throw CreateAndLogValidationException(invalidCustException);
+            }
             catch (NullCustomerException nullCustomerException)
             {
                 throw CreateAndLogValidationException(nullCustomerException);
