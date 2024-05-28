@@ -6,6 +6,6 @@ namespace OSCRM.Web.Api.Storages
     public partial class StorageRepository
     {
         public async ValueTask<Customer?> SelectCustomerAsync(string email) =>
-            await this._context.customerTbl.FirstOrDefaultAsync(x => x.email_address == email);
+            await this._context.customerTbl.FirstOrDefaultAsync(x => x.email_address == email && x.is_active == true);
     }
 }
