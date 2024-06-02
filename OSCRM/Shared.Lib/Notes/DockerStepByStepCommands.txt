@@ -1,5 +1,114 @@
-Install https://www.docker.com/products/docker-desktop/
+1. Install https://www.docker.com/products/docker-desktop/
 
-Create a docker file and then run the below command
+2. Create a docker file and then run the below command
+/*
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-PS C:\Abhishek\dotnet-pg\OSCRMv8.0> docker build -t oscrmapi .
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER app
+WORKDIR /app
+EXPOSE 5000
+EXPOSE 5001
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+COPY ["OSCRM/Core.Web.App/Core.Web.App.csproj", "Core.Web.App/"]
+# COPY ["OSCRM/LakeMaster.Web.Api/LakeMaster.Web.Api.csproj", "LakeMaster.Web.Api/"]
+# COPY ["OSCRM/Data.Warehouse.PostgreSQL/Data.Warehouse.PostgreSQL.csproj", "Data.Warehouse.PostgreSQL/"]
+# COPY ["OSCRM/DB.Models/DB.Models.csproj", "DB.Models/"]
+# COPY ["OSCRM/Shared.Lib/Shared.Lib.csproj", "Shared.Lib/"]
+# COPY ["OSCRM/OSCRM.Web.Api/OSCRM.Web.Api.csproj", "OSCRM.Web.Api/"]
+# COPY ["OSCRM/Rehearsal.Web.Api/Rehearsal.Web.Api.csproj", "Rehearsal.Web.Api/"]
+RUN dotnet restore "./Core.Web.App/Core.Web.App.csproj"
+COPY . .
+WORKDIR "/src/OSCRM/Core.Web.App"
+RUN dotnet build "./Core.Web.App.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./Core.Web.App.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Core.Web.App.dll"]
+*/
+
+3. Create a file with same director where your "Dockerfile" is kept
+/*
+version: "3.4"
+
+networks:
+  abhi:
+    driver: bridge
+
+services:
+  oscrm.app.communicator:
+    image: docker.io/library/oscrmapp
+    depends_on:
+      - "oscrm.pgdb.communicator"
+    container_name: oscrmapp_service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Abhishek
+      - ASPNETCORE_HTTP_PORT=5000
+      - ASPNETCORE_HTTPS_PORT=5001
+      - ASPNETCORE_URLS=http://+:5000
+    ports:
+      - "8000:5000"
+      - "8001:5001"
+    networks:
+      - "abhi"
+
+  oscrm.pgdb.communicator:
+    image: postgres:latest
+    container_name: oscrmapp_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pgroot
+      - POSTGRES_DB=postgres
+    ports:
+      - "5433:5432"
+    restart: always
+    volumes:
+      - app_data:/var/lib/postgresql/data
+    networks:
+      - "abhi"
+
+volumes:
+  app_data:
+*/
+
+4. Go to your ASPNETCORE_ENVIRONMENT (Abhishek in this case so go to appsettings.Abhishek.json) and change host/server in all database connection strings to container_name of database (oscrmapp_db in this case)
+
+5. PS C:\Abhishek\dotnet-pg\OSCRMv8_PG> docker-compose up --build
+
+6. If you get an error related to multiple app.settings.json file
+    - Go to statup-project Core.Web.App.csproj file and add <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+      under <PropertyGroup>
+
+7. PS C:\Abhishek\dotnet-pg\OSCRMv8_PG> docker-compose up --build
+
+8. Now open browser and type "http://localhost:8000/"
+    - You'll be redirected to https://localhost:5001/
+    - Then it says "This site can’t be reached. localhost refused to connect."
+
+9. Go to program.cs of Core.Web.App.csproj
+    - Comment "app.UseHttpsRedirection();" line
+
+10. PS C:\Abhishek\dotnet-pg\OSCRMv8_PG> docker-compose up --build
+
+11. Now open browser and type "http://localhost:8000/" or "http://localhost:8000/swagger/index.html"
+
+12. Now perform crud(add 5 elements, retrieve all, update 1 element, and delete 1 element, retrieve all 9 records) with db using apis
+
+13. PS C:\Abhishek\dotnet-pg\OSCRMv8_PG> docker-compose down
+
+14. PS C:\Abhishek\dotnet-pg\OSCRMv8_PG> docker-compose up --build
+
+15. Now open browser and type "http://localhost:8000/swagger/index.html"
+
+16. Now add 2 elements then again retrieve all 11 elements using apis

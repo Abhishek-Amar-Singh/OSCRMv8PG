@@ -22,12 +22,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//--uncomment in future (this is done while running dotnet core application in docker-container using docker-compose)
+//app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
+
+//--remove below line in future
+app.MapGet("/hello", () => "Hello World!");
 
 //--use WebApplication custom services
 app.UseWebAppServices();

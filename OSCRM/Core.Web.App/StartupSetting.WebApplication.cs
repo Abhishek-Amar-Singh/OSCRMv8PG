@@ -34,7 +34,7 @@ public static partial class StartupSetting
     private static void RunAutomaticMigration<T>(WebApplication app) where T : DbContext
     {
         using var scope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope();
-        var context = scope?.ServiceProvider.GetRequiredService<T>();
+        using var context = scope?.ServiceProvider.GetRequiredService<T>();
         context?.Database.Migrate();
     }
 }

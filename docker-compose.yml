@@ -1,0 +1,43 @@
+version: "3.4"
+
+networks:
+  abhi:
+    driver: bridge
+
+services:
+  oscrm.app.communicator:
+    image: docker.io/library/oscrmapp
+    depends_on:
+      - "oscrm.pgdb.communicator"
+    container_name: oscrmapp_service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Abhishek
+      - ASPNETCORE_HTTP_PORT=5000
+      - ASPNETCORE_HTTPS_PORT=5001
+      - ASPNETCORE_URLS=http://+:5000
+    ports:
+      - "8000:5000"
+      - "8001:5001"
+    networks:
+      - "abhi"
+
+  oscrm.pgdb.communicator:
+    image: postgres:latest
+    container_name: oscrmapp_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pgroot
+      - POSTGRES_DB=postgres
+    ports:
+      - "5433:5432"
+    restart: always
+    volumes:
+      - app_data:/var/lib/postgresql/data
+    networks:
+      - "abhi"
+
+volumes:
+  app_data:
