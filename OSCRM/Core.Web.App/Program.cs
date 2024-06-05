@@ -23,7 +23,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 //--uncomment in future (this is done while running dotnet core application in docker-container using docker-compose)
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 

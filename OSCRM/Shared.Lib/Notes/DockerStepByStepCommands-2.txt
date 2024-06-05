@@ -1,0 +1,301 @@
+Run api with docker using HTTPS
+
+1.
+C:\Users\user>dotnet dev-certs https --check
+A valid certificate was found: 37457277E638E5C5FD698870DAFBF7E9B318C17D - CN=localhost - Valid from 2024-05-12 14:05:11Z to 2025-05-12 14:05:11Z - IsHttpsDevelopmentCertificate: true - IsExportable: true
+Run the command with both --check and --trust options to ensure that the certificate is not only valid but also trusted.
+
+2.
+C:\Users\user>dotnet dev-certs https --clean
+Cleaning HTTPS development certificates from the machine. A prompt might get displayed to confirm the removal of some of the certificates.
+HTTPS development certificates successfully removed from the machine.
+
+3.
+C:\Users\user>dotnet dev-certs https --check
+No valid certificate found.
+
+4.
+https://learn.microsoft.com/en-us/aspnet/core/security/docker-https?view=aspnetcore-8.0
+https://learn.microsoft.com/en-us/aspnet/core/security/docker-compose-https?view=aspnetcore-8.0
+
+5.
+C:\Users\user>dotnet dev-certs https -ep "C:\Abhishek\dotnet-pg\OSCRMv8_PG\OSCRM\Shared.Lib\Certificates\.aspnet\https\a
+spnetapp.pfx" -p https-cert-docker-pwd
+The HTTPS developer certificate was generated successfully.
+
+6.
+C:\Users\user>dotnet dev-certs https --trust
+Trusting the HTTPS development certificate was requested. A confirmation prompt will be displayed if the certificate was not previously trusted. Click yes on the prompt to trust the certificate.
+Successfully trusted the existing HTTPS certificate.
+
+7.
+C:\Users\user>dotnet dev-certs https --check
+A valid certificate was found: FEE0800B16A854F3B4BD42BA033C8C1D4A5722BF - CN=localhost - Valid from 2024-06-03 15:11:52Z to 2025-06-03 15:11:52Z - IsHttpsDevelopmentCertificate: true - IsExportable: true
+Run the command with both --check and --trust options to ensure that the certificate is not only valid but also trusted.
+
+8. Make changes in docker-compose.yml file
+/*
+version: "3.4"
+
+networks:
+  abhi:
+    driver: bridge
+
+services:
+  oscrm.app.communicator:
+    image: docker.io/library/oscrmapp
+    depends_on:
+      - "oscrm.pgdb.communicator"
+    container_name: oscrmapp_service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Abhishek
+      - ASPNETCORE_HTTP_PORT=5000
+      - ASPNETCORE_HTTPS_PORT=5001
+      - ASPNETCORE_URLS=https://+:5001;http://+:5000
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=https-cert-docker-pwd
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=OSCRM/Shared.Lib/Certificates/.aspnet/https/aspnetapp.pfx
+    ports:
+      - "8000:5000"
+      - "8001:5001"
+    networks:
+      - "abhi"
+
+  oscrm.pgdb.communicator:
+    image: postgres:latest
+    container_name: oscrmapp_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pgroot
+      - POSTGRES_DB=postgres
+    ports:
+      - "5433:5432"
+    restart: always
+    volumes:
+      - app_data:/var/lib/postgresql/data
+    networks:
+      - "abhi"
+
+volumes:
+  app_data:
+*/
+
+9.
+PS C:\Abhishek\dotnet-pg\OSCRMv8_PG> docker-compose up --build
+oscrmapp_db       | 2024-06-03 10:03:23.282 UTC [1] LOG:  starting PostgreSQL 16.3 (Debian 16.3-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+oscrmapp_db       | 2024-06-03 10:03:23.282 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+oscrmapp_db       | 2024-06-03 10:03:23.283 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+oscrmapp_db       | 2024-06-03 10:03:23.310 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+oscrmapp_db       | 2024-06-03 10:03:23.350 UTC [29] LOG:  database system was shut down at 2024-06-03 09:59:41 UTC
+oscrmapp_db       | 2024-06-03 10:03:23.426 UTC [1] LOG:  database system is ready to accept connections
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (146ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT EXISTS (
+oscrmapp_service  |           SELECT 1 FROM pg_catalog.pg_class c
+oscrmapp_service  |           JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+oscrmapp_service  |           WHERE n.nspname='public' AND
+oscrmapp_service  |                 c.relname='__EFMigrationsHistory'
+oscrmapp_service  |       )
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT "MigrationId", "ProductVersion"
+oscrmapp_service  |       FROM "__EFMigrationsHistory"
+oscrmapp_service  |       ORDER BY "MigrationId";
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT EXISTS (
+oscrmapp_service  |           SELECT 1 FROM pg_catalog.pg_class c
+oscrmapp_service  |           JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+oscrmapp_service  |           WHERE n.nspname='public' AND
+oscrmapp_service  |                 c.relname='__EFMigrationsHistory'
+oscrmapp_service  |       )
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT EXISTS (
+oscrmapp_service  |           SELECT 1 FROM pg_catalog.pg_class c
+oscrmapp_service  |           JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+oscrmapp_service  |           WHERE n.nspname='public' AND
+oscrmapp_service  |                 c.relname='__EFMigrationsHistory'
+oscrmapp_service  |       )
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT "MigrationId", "ProductVersion"
+oscrmapp_service  |       FROM "__EFMigrationsHistory"
+oscrmapp_service  |       ORDER BY "MigrationId";
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Migrations[20405]
+oscrmapp_service  |       No migrations were applied. The database is already up to date.
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT EXISTS (
+oscrmapp_service  |           SELECT 1 FROM pg_catalog.pg_class c
+oscrmapp_service  |           JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+oscrmapp_service  |           WHERE n.nspname='public' AND
+oscrmapp_service  |                 c.relname='__EFMigrationsHistory'
+oscrmapp_service  |       )
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT "MigrationId", "ProductVersion"
+oscrmapp_service  |       FROM "__EFMigrationsHistory"
+oscrmapp_service  |       ORDER BY "MigrationId";
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT EXISTS (
+oscrmapp_service  |           SELECT 1 FROM pg_catalog.pg_class c
+oscrmapp_service  |           JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+oscrmapp_service  |           WHERE n.nspname='public' AND
+oscrmapp_service  |                 c.relname='__EFMigrationsHistory'
+oscrmapp_service  |       )
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT EXISTS (
+oscrmapp_service  |           SELECT 1 FROM pg_catalog.pg_class c
+oscrmapp_service  |           JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+oscrmapp_service  |           WHERE n.nspname='public' AND
+oscrmapp_service  |                 c.relname='__EFMigrationsHistory'
+oscrmapp_service  |       )
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT "MigrationId", "ProductVersion"
+oscrmapp_service  |       FROM "__EFMigrationsHistory"
+oscrmapp_service  |       ORDER BY "MigrationId";
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Migrations[20405]
+oscrmapp_service  |       No migrations were applied. The database is already up to date.
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT EXISTS (
+oscrmapp_service  |           SELECT 1 FROM pg_catalog.pg_class c
+oscrmapp_service  |           JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+oscrmapp_service  |           WHERE n.nspname='public' AND
+oscrmapp_service  |                 c.relname='__EFMigrationsHistory'
+oscrmapp_service  |       )
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT "MigrationId", "ProductVersion"
+oscrmapp_service  |       FROM "__EFMigrationsHistory"
+oscrmapp_service  |       ORDER BY "MigrationId";
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT EXISTS (
+oscrmapp_service  |           SELECT 1 FROM pg_catalog.pg_class c
+oscrmapp_service  |           JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+oscrmapp_service  |           WHERE n.nspname='public' AND
+oscrmapp_service  |                 c.relname='__EFMigrationsHistory'
+oscrmapp_service  |       )
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT EXISTS (
+oscrmapp_service  |           SELECT 1 FROM pg_catalog.pg_class c
+oscrmapp_service  |           JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+oscrmapp_service  |           WHERE n.nspname='public' AND
+oscrmapp_service  |                 c.relname='__EFMigrationsHistory'
+oscrmapp_service  |       )
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+oscrmapp_service  |       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+oscrmapp_service  |       SELECT "MigrationId", "ProductVersion"
+oscrmapp_service  |       FROM "__EFMigrationsHistory"
+oscrmapp_service  |       ORDER BY "MigrationId";
+oscrmapp_service  | info: Microsoft.EntityFrameworkCore.Migrations[20405]
+oscrmapp_service  |       No migrations were applied. The database is already up to date.
+oscrmapp_service  | warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+oscrmapp_service  |       Storing keys in a directory '/home/app/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning        
+oscrmapp_service  | warn: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[35]
+oscrmapp_service  |       No XML encryptor configured. Key {67c847d1-c6b2-4aa6-a140-b2d738a401d5} may be persisted to storage in unencrypted form.
+oscrmapp_service  | warn: Microsoft.AspNetCore.Hosting.Diagnostics[15]
+oscrmapp_service  |       Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'https://+:5001;http://+:5000'.
+oscrmapp_service  | fail: Microsoft.Extensions.Hosting.Internal.Host[11]
+oscrmapp_service  |       Hosting failed to start
+oscrmapp_service  |       System.IO.DirectoryNotFoundException: Could not find a part of the path '/app/OSCRM/Shared.Lib/Certificates/.aspnet/https/aspnetapp.pfx'.
+oscrmapp_service  |          at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+oscrmapp_service  |          at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+oscrmapp_service  |          at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+oscrmapp_service  |          at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+oscrmapp_service  |          at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+oscrmapp_service  |          at System.IO.File.ReadAllText(String path, Encoding encoding)
+oscrmapp_service  |          at System.Security.Cryptography.X509Certificates.X509Certificate2Collection.ImportFromPemFile(String certPemFilePath)
+oscrmapp_service  |          at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Certificates.CertificateConfigLoader.LoadCertificate(CertificateConfig certInfo, String endpointName)
+oscrmapp_service  |          at Microsoft.AspNetCore.Server.Kestrel.Core.TlsConfigurationLoader.LoadDefaultCertificate(ConfigurationReader configurationReader)
+oscrmapp_service  |          at Microsoft.AspNetCore.Server.Kestrel.KestrelConfigurationLoader.Reload()
+oscrmapp_service  |          at Microsoft.AspNetCore.Server.Kestrel.KestrelConfigurationLoader.LoadInternal()
+oscrmapp_service  |          at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)       
+oscrmapp_service  |          at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+oscrmapp_service  |          at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+oscrmapp_service  |          at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token) 
+oscrmapp_service  |          at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+oscrmapp_service  | Unhandled exception. System.IO.DirectoryNotFoundException: Could not find a part of the path '/app/OSCRM/Shared.Lib/Certificates/.aspnet/https/aspnetapp.pfx'.
+oscrmapp_service  |    at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+oscrmapp_service  |    at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+oscrmapp_service  |    at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+oscrmapp_service  |    at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+oscrmapp_service  |    at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Encoding encoding, Int32 bufferSize)
+oscrmapp_service  |    at System.IO.File.ReadAllText(String path, Encoding encoding)
+oscrmapp_service  |    at System.Security.Cryptography.X509Certificates.X509Certificate2Collection.ImportFromPemFile(String certPemFilePath)    
+oscrmapp_service  |    at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Certificates.CertificateConfigLoader.LoadCertificate(CertificateConfig certInfo, String endpointName)
+oscrmapp_service  |    at Microsoft.AspNetCore.Server.Kestrel.Core.TlsConfigurationLoader.LoadDefaultCertificate(ConfigurationReader configurationReader)
+oscrmapp_service  |    at Microsoft.AspNetCore.Server.Kestrel.KestrelConfigurationLoader.Reload()
+oscrmapp_service  |    at Microsoft.AspNetCore.Server.Kestrel.KestrelConfigurationLoader.LoadInternal()
+oscrmapp_service  |    at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+oscrmapp_service  |    at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+oscrmapp_service  |    at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+oscrmapp_service  |    at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)       
+oscrmapp_service  |    at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+oscrmapp_service  |    at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+oscrmapp_service  |    at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+oscrmapp_service  |    at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+oscrmapp_service  |    at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+oscrmapp_service  |    at Program.<Main>$(String[] args) in /src/OSCRM/Core.Web.App/Program.cs:line 44
+oscrmapp_service exited with code 139
+Gracefully stopping... (press Ctrl+C again to force)
+
+Microsoft.Extensions.Hosting.Internal.Host[11]
+oscrmapp_service  |       Hosting failed to start
+oscrmapp_service  |       System.IO.DirectoryNotFoundException: Could not find a part of the path '/app/OSCRM/Shared.Lib/Certificates/.aspnet/https/aspnetapp.pfx'.
+oscrmapp_service  |          
+
+10.
+PS C:\Abhishek\dotnet-pg\OSCRMv8_PG> docker-compose down
+
+11.
+Delete all containers and volumes from docker desktop
+
+12. Remove app.UseHttpsRedirection(); from Program.cs which is present in Core.Web.App if you dont't want http://localhost:8000/swagger/index.html
+
+13. Change the Dockerfile
+RUN mkdir -p "/app/Certificates"
+COPY ["./OSCRM/Shared.Lib/Certificates/.aspnet/https/aspnetapp.pfx", "/app/Certificates"]
+
+14. Change the docker-compose.yml file
+- ASPNETCORE_ENVIRONMENT=Abhishek
+- ASPNETCORE_HTTP_PORT=5000
+- ASPNETCORE_HTTPS_PORT=5001
+- ASPNETCORE_URLS=https://+:5001;http://+:5000
+- ASPNETCORE_Kestrel__Certificates__Default__Password=https-cert-docker-pwd
+- ASPNETCORE_Kestrel__Certificates__Default__Path=./Certificates/aspnetapp.pfx
+
+15.
+PS C:\Abhishek\dotnet-pg\OSCRMv8_PG> docker-compose up --build
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+oscrmapp_service  |       Storing keys in a directory '/home/app/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning        
+oscrmapp_service  | warn: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[35]
+oscrmapp_service  |       No XML encryptor configured. Key {04fc587d-93a1-4103-a1d3-a2640937fb90} may be persisted to storage in unencrypted form.
+oscrmapp_service  | warn: Microsoft.AspNetCore.Hosting.Diagnostics[15]
+oscrmapp_service  |       Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'https://+:5001;http://+:5000'.
+oscrmapp_service  | info: Microsoft.Hosting.Lifetime[14]
+oscrmapp_service  |       Now listening on: https://[::]:5001
+oscrmapp_service  | info: Microsoft.Hosting.Lifetime[14]
+oscrmapp_service  |       Now listening on: http://[::]:5000
+oscrmapp_service  | info: Microsoft.Hosting.Lifetime[0]
+oscrmapp_service  |       Application started. Press Ctrl+C to shut down.
+oscrmapp_service  | info: Microsoft.Hosting.Lifetime[0]
+oscrmapp_service  |       Hosting environment: Abhishek
+oscrmapp_service  | info: Microsoft.Hosting.Lifetime[0]
+oscrmapp_service  |       Content root path: /app
+
+
+16. Go to web browser
+type "http://localhost:8000/swagger/index.html"
+or
+type "https://localhost:8001/swagger/index.html"
+then
+Perform crud
