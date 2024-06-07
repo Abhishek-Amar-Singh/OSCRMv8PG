@@ -9,6 +9,7 @@ using Data.Warehouse.PostgreSQL.LakeMaster.DAL;
 using Asp.Versioning;
 using OSCRMV1Services = OSCRM.Web.Api.Services.v1;
 using OSCRMStorages = OSCRM.Web.Api.Storages;
+using RehearsalV1Services = Rehearsal.Web.Api.Services.v1;
 
 
 public static partial class StartupSetting
@@ -103,6 +104,7 @@ public static partial class StartupSetting
     private static void AddFoundationServices(IServiceCollection services)
     {
         services.AddScoped<OSCRMV1Services.Customers.ICustomerService, OSCRMV1Services.Customers.CustomerService>();
+        services.AddScoped<RehearsalV1Services.Eulers.IEulerService, RehearsalV1Services.Eulers.EulerService>();
     }
 
     private static void AddRepositories(IServiceCollection services)
