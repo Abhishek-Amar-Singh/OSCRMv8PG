@@ -84,7 +84,12 @@
             }
 
             var xs = primes.Where(x => find_pf % x == 0);
-            return new { primes, xs };
+            int result = 1;
+            foreach (int x in xs)
+            {
+                result *= x;
+            }
+            return new { primes, xs, result,  };
         }
     }
 }
