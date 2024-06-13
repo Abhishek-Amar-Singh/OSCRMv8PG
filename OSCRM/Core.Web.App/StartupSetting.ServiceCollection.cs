@@ -139,5 +139,4 @@ public static partial class StartupSetting
             options.SubstituteApiVersionInUrl = true;
         });
     }
-
 }
