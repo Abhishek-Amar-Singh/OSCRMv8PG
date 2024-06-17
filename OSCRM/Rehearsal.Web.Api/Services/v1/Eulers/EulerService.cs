@@ -62,11 +62,13 @@
 
         public dynamic SolveProblem3()
         {
-            int till = 40000;
-            List<int> primes = new() { 2 };
-            int find_pf = 13195;
+            //List<long> primes = new() { 2 };
+            List<long> prime_factors = new();
+            long find_pf = 600851475143;//13195;
+            //long result = 1;
 
-            for (int i = 3; i < till; i += 2) // Start from 3 and increment by 2 to check only odd numbers
+            int till = (int)Math.Sqrt(find_pf) + 1;
+            for (long i = 3; i <= till; i += 2) // Start from 3 and increment by 2 to check only odd numbers
             {
                 bool isPrime = true;
                 int sqrt = (int)Math.Sqrt(i) + 1; // Calculate square root once
@@ -80,16 +82,19 @@
                     }
                 }
 
-                if (isPrime) primes.Add(i);
+                if (isPrime)
+                {
+                    //primes.Add(i);
+                    if (find_pf % i == 0)
+                    {
+                        prime_factors.Add(i);
+                        //result *= i;
+                    }
+                }
             }
 
-            var xs = primes.Where(x => find_pf % x == 0);
-            int result = 1;
-            foreach (int x in xs)
-            {
-                result *= x;
-            }
-            return new { primes, xs, result,  };
+            return new { prime_factors, largest_prime_factor = $"The largest prime factor of {find_pf} is {prime_factors.Last()}." };
+            //return new { primes, prime_factors, result, is_eq = result == find_pf};
         }
     }
 }
