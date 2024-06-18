@@ -1,0 +1,20 @@
+﻿
+AWS Elastic Static IP for DBServer Conf
+
+
+When you stop ec2 instance and then start it again the "Public IPv4 address" and "Public IPv4 DNS" will change but if you want Public IPv4 address" and "Public IPv4 DNS" these two to not change then you have to use "Elastic IP addresses" 
+
+Go to EC2 Dashboard
+Elastic IPs
+Allocate Elastic IP address
+Allocate
+
+Associate Elastic IP address
+For Resource type, select Instance.
+For Instance, select your EC2 instance from the dropdown list.
+Associate 
+
+
+Now try to stop ec2 instance and start again
+the "Public IPv4 address" and "Public IPv4 DNS" will not change.
+

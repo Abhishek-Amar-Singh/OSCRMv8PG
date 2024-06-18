@@ -1,0 +1,705 @@
+﻿
+AWS ubuntu Conf
+
+
+Microsoft Windows [Version 10.0.19045.4529]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Abhishek>ssh -i "C:\Users\Abhishek\Downloads\kp-ab.pem" ubuntu@ec2-15-207-89-76.ap-south-1.compute.amazonaws.com
+The authenticity of host 'ec2-15-207-89-76.ap-south-1.compute.amazonaws.com (64:ff9b::fcf:594c)' can't be established.
+ECDSA key fingerprint is SHA256:BL10w3sH9mO1rbPiphT4HyxD+howPTnSDuwLauGskhY.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-15-207-89-76.ap-south-1.compute.amazonaws.com,64:ff9b::fcf:594c' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 24.04 LTS (GNU/Linux 6.8.0-1008-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Jun 17 13:29:13 UTC 2024
+
+  System load:  0.16              Processes:             106
+  Usage of /:   23.2% of 6.71GB   Users logged in:       0
+  Memory usage: 21%               IPv4 address for enX0: 172.31.5.172
+  Swap usage:   0%
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-172-31-5-172:~$
+ubuntu@ip-172-31-5-172:~$
+ubuntu@ip-172-31-5-172:~$
+ubuntu@ip-172-31-5-172:~$
+ubuntu@ip-172-31-5-172:~$
+ubuntu@ip-172-31-5-172:~$ sudo su
+root@ip-172-31-5-172:/home/ubuntu# sudo apt update
+Get:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+Get:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:3 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:4 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 Packages [1401 kB]
+Get:5 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/main Translation-en [513 kB]
+Get:6 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 Packages [15.0 MB]
+Get:7 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:8 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/universe Translation-en [5982 kB]
+Get:9 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 Components [3871 kB]
+Get:10 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/universe amd64 c-n-f Metadata [301 kB]
+Get:11 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [93.9 kB]
+Get:12 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/restricted Translation-en [18.7 kB]
+Get:13 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [269 kB]
+Get:14 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse Translation-en [118 kB]
+Get:15 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 Components [35.0 kB]
+Get:16 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/multiverse amd64 c-n-f Metadata [8328 B]
+Get:17 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [169 kB]
+Get:18 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [46.7 kB]
+Get:19 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [8564 B]
+Get:20 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [65.2 kB]
+Get:21 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [24.7 kB]
+Get:22 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [45.0 kB]
+Get:23 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [112 B]
+Get:24 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [70.1 kB]
+Get:25 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [14.3 kB]
+Get:26 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+Get:27 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [2968 B]
+Get:28 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [968 B]
+Get:29 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [212 B]
+Get:30 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 c-n-f Metadata [116 B]
+Get:31 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [208 B]
+Get:32 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports/main amd64 c-n-f Metadata [112 B]
+Get:33 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [6840 B]
+Get:34 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [9652 B]
+Get:35 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [17.6 kB]
+Get:36 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports/universe amd64 c-n-f Metadata [116 B]
+Get:37 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+Get:38 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:39 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+Get:40 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 c-n-f Metadata [116 B]
+Get:41 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [150 kB]
+Get:42 http://security.ubuntu.com/ubuntu noble-security/main Translation-en [39.1 kB]
+Get:43 http://security.ubuntu.com/ubuntu noble-security/main amd64 Components [6876 B]
+Get:44 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [42.9 kB]
+Get:45 http://security.ubuntu.com/ubuntu noble-security/universe Translation-en [16.6 kB]
+Get:46 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Components [8632 B]
+Get:47 http://security.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [112 B]
+Get:48 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [70.1 kB]
+Get:49 http://security.ubuntu.com/ubuntu noble-security/restricted Translation-en [14.3 kB]
+Get:50 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B]
+Get:51 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [208 B]
+Get:52 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 c-n-f Metadata [116 B]
+Fetched 29.1 MB in 7s (4434 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+77 packages can be upgraded. Run 'apt list --upgradable' to see them.
+root@ip-172-31-5-172:/home/ubuntu# client_loop: send disconnect: Connection reset
+
+C:\Users\Abhishek>
+C:\Users\Abhishek>
+C:\Users\Abhishek>ssh -i "C:\Users\Abhishek\Downloads\kp-ab.pem" ubuntu@ec2-15-207-89-76.ap-south-1.compute.amazonaws.com
+Welcome to Ubuntu 24.04 LTS (GNU/Linux 6.8.0-1008-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Jun 17 13:36:21 UTC 2024
+
+  System load:  0.0               Processes:             112
+  Usage of /:   26.2% of 6.71GB   Users logged in:       1
+  Memory usage: 21%               IPv4 address for enX0: 172.31.5.172
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+83 updates can be applied immediately.
+48 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Mon Jun 17 13:29:14 2024 from 152.58.17.107
+ubuntu@ip-172-31-5-172:~$
+ubuntu@ip-172-31-5-172:~$
+ubuntu@ip-172-31-5-172:~$ sudo su
+root@ip-172-31-5-172:/home/ubuntu# sudo apt update
+Hit:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble InRelease
+Hit:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:3 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu noble-security InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+77 packages can be upgraded. Run 'apt list --upgradable' to see them.
+root@ip-172-31-5-172:/home/ubuntu# sudo apt install curl ca-certificates
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20240203).
+ca-certificates set to manually installed.
+The following additional packages will be installed:
+  libcurl3t64-gnutls libcurl4t64
+The following packages will be upgraded:
+  curl libcurl3t64-gnutls libcurl4t64
+3 upgraded, 0 newly installed, 0 to remove and 74 not upgraded.
+Need to get 900 kB of archives.
+After this operation, 0 B of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 curl amd64 8.5.0-2ubuntu10.1 [227 kB]
+Get:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl4t64 amd64 8.5.0-2ubuntu10.1 [341 kB]
+Get:3 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates/main amd64 libcurl3t64-gnutls amd64 8.5.0-2ubuntu10.1 [333 kB]
+Fetched 900 kB in 0s (28.0 MB/s)
+(Reading database ... 71839 files and directories currently installed.)
+Preparing to unpack .../curl_8.5.0-2ubuntu10.1_amd64.deb ...
+Unpacking curl (8.5.0-2ubuntu10.1) over (8.5.0-2ubuntu10) ...
+Preparing to unpack .../libcurl4t64_8.5.0-2ubuntu10.1_amd64.deb ...
+Unpacking libcurl4t64:amd64 (8.5.0-2ubuntu10.1) over (8.5.0-2ubuntu10) ...
+Preparing to unpack .../libcurl3t64-gnutls_8.5.0-2ubuntu10.1_amd64.deb ...
+Unpacking libcurl3t64-gnutls:amd64 (8.5.0-2ubuntu10.1) over (8.5.0-2ubuntu10) ...
+Setting up libcurl4t64:amd64 (8.5.0-2ubuntu10.1) ...
+Setting up libcurl3t64-gnutls:amd64 (8.5.0-2ubuntu10.1) ...
+Setting up curl (8.5.0-2ubuntu10.1) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8) ...
+Scanning processes...
+Scanning candidates...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+ systemctl restart packagekit.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+root@ip-172-31-5-172:/home/ubuntu# sudo install -d /usr/share/postgresql-common/pgdg
+root@ip-172-31-5-172:/home/ubuntu# sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  4812  100  4812    0     0   5448      0 --:--:-- --:--:-- --:--:--  5443
+root@ip-172-31-5-172:/home/ubuntu# sudo sh -c 'echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+root@ip-172-31-5-172:/home/ubuntu# sudo apt update
+Hit:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble InRelease
+Hit:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:3 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu noble-security InRelease
+Get:5 https://apt.postgresql.org/pub/repos/apt noble-pgdg InRelease [123 kB]
+Get:6 https://apt.postgresql.org/pub/repos/apt noble-pgdg/main amd64 Packages [291 kB]
+Fetched 414 kB in 3s (144 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+74 packages can be upgraded. Run 'apt list --upgradable' to see them.
+root@ip-172-31-5-172:/home/ubuntu# sudo apt -y install postgresql
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libcommon-sense-perl libjson-perl libjson-xs-perl libllvm17t64 libpq5 libtypes-serialiser-perl postgresql-16
+  postgresql-client-16 postgresql-client-common postgresql-common ssl-cert
+Suggested packages:
+  postgresql-doc postgresql-doc-16
+The following NEW packages will be installed:
+  libcommon-sense-perl libjson-perl libjson-xs-perl libllvm17t64 libpq5 libtypes-serialiser-perl postgresql
+  postgresql-16 postgresql-client-16 postgresql-client-common postgresql-common ssl-cert
+0 upgraded, 12 newly installed, 0 to remove and 74 not upgraded.
+Need to get 45.3 MB of archives.
+After this operation, 192 MB of additional disk space will be used.
+Get:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libjson-perl all 4.10000-1 [81.9 kB]
+Get:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 ssl-cert all 1.1.2ubuntu1 [17.8 kB]
+Get:3 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libcommon-sense-perl amd64 3.75-3build3 [20.4 kB]
+Get:4 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libtypes-serialiser-perl all 1.01-1 [11.6 kB]
+Get:5 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libjson-xs-perl amd64 4.030-2build3 [83.6 kB]
+Get:6 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 libllvm17t64 amd64 1:17.0.6-9ubuntu1 [26.2 MB]
+Get:7 https://apt.postgresql.org/pub/repos/apt noble-pgdg/main amd64 postgresql-client-common all 260.pgdg24.04+1 [36.0 kB]
+Get:8 https://apt.postgresql.org/pub/repos/apt noble-pgdg/main amd64 postgresql-common all 260.pgdg24.04+1 [169 kB]
+Get:9 https://apt.postgresql.org/pub/repos/apt noble-pgdg/main amd64 libpq5 amd64 16.3-1.pgdg24.04+1 [218 kB]
+Get:10 https://apt.postgresql.org/pub/repos/apt noble-pgdg/main amd64 postgresql-client-16 amd64 16.3-1.pgdg24.04+1 [1888 kB]
+Get:11 https://apt.postgresql.org/pub/repos/apt noble-pgdg/main amd64 postgresql-16 amd64 16.3-1.pgdg24.04+1 [16.6 MB]
+Get:12 https://apt.postgresql.org/pub/repos/apt noble-pgdg/main amd64 postgresql all 16+260.pgdg24.04+1 [11.9 kB]
+Fetched 45.3 MB in 4s (11.8 MB/s)
+Preconfiguring packages ...
+Selecting previously unselected package libjson-perl.
+(Reading database ... 71839 files and directories currently installed.)
+Preparing to unpack .../00-libjson-perl_4.10000-1_all.deb ...
+Unpacking libjson-perl (4.10000-1) ...
+Selecting previously unselected package postgresql-client-common.
+Preparing to unpack .../01-postgresql-client-common_260.pgdg24.04+1_all.deb ...
+Unpacking postgresql-client-common (260.pgdg24.04+1) ...
+Selecting previously unselected package ssl-cert.
+Preparing to unpack .../02-ssl-cert_1.1.2ubuntu1_all.deb ...
+Unpacking ssl-cert (1.1.2ubuntu1) ...
+Selecting previously unselected package postgresql-common.
+Preparing to unpack .../03-postgresql-common_260.pgdg24.04+1_all.deb ...
+Adding 'diversion of /usr/bin/pg_config to /usr/bin/pg_config.libpq-dev by postgresql-common'
+Unpacking postgresql-common (260.pgdg24.04+1) ...
+Selecting previously unselected package libcommon-sense-perl:amd64.
+Preparing to unpack .../04-libcommon-sense-perl_3.75-3build3_amd64.deb ...
+Unpacking libcommon-sense-perl:amd64 (3.75-3build3) ...
+Selecting previously unselected package libtypes-serialiser-perl.
+Preparing to unpack .../05-libtypes-serialiser-perl_1.01-1_all.deb ...
+Unpacking libtypes-serialiser-perl (1.01-1) ...
+Selecting previously unselected package libjson-xs-perl.
+Preparing to unpack .../06-libjson-xs-perl_4.030-2build3_amd64.deb ...
+Unpacking libjson-xs-perl (4.030-2build3) ...
+Selecting previously unselected package libllvm17t64:amd64.
+Preparing to unpack .../07-libllvm17t64_1%3a17.0.6-9ubuntu1_amd64.deb ...
+Unpacking libllvm17t64:amd64 (1:17.0.6-9ubuntu1) ...
+Selecting previously unselected package libpq5:amd64.
+Preparing to unpack .../08-libpq5_16.3-1.pgdg24.04+1_amd64.deb ...
+Unpacking libpq5:amd64 (16.3-1.pgdg24.04+1) ...
+Selecting previously unselected package postgresql-client-16.
+Preparing to unpack .../09-postgresql-client-16_16.3-1.pgdg24.04+1_amd64.deb ...
+Unpacking postgresql-client-16 (16.3-1.pgdg24.04+1) ...
+Selecting previously unselected package postgresql-16.
+Preparing to unpack .../10-postgresql-16_16.3-1.pgdg24.04+1_amd64.deb ...
+Unpacking postgresql-16 (16.3-1.pgdg24.04+1) ...
+Selecting previously unselected package postgresql.
+Preparing to unpack .../11-postgresql_16+260.pgdg24.04+1_all.deb ...
+Unpacking postgresql (16+260.pgdg24.04+1) ...
+Setting up postgresql-client-common (260.pgdg24.04+1) ...
+Setting up libpq5:amd64 (16.3-1.pgdg24.04+1) ...
+Setting up libcommon-sense-perl:amd64 (3.75-3build3) ...
+Setting up libllvm17t64:amd64 (1:17.0.6-9ubuntu1) ...
+Setting up ssl-cert (1.1.2ubuntu1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/ssl-cert.service → /usr/lib/systemd/system/ssl-cert.service.
+Setting up libtypes-serialiser-perl (1.01-1) ...
+Setting up libjson-perl (4.10000-1) ...
+Setting up libjson-xs-perl (4.030-2build3) ...
+Setting up postgresql-client-16 (16.3-1.pgdg24.04+1) ...
+update-alternatives: using /usr/share/postgresql/16/man/man1/psql.1.gz to provide /usr/share/man/man1/psql.1.gz (psql.1.gz) in auto mode
+Setting up postgresql-common (260.pgdg24.04+1) ...
+
+Creating config file /etc/postgresql-common/createcluster.conf with new version
+Building PostgreSQL dictionaries from installed myspell/hunspell packages...
+Removing obsolete dictionary files:
+Created symlink /etc/systemd/system/multi-user.target.wants/postgresql.service → /usr/lib/systemd/system/postgresql.service.
+Setting up postgresql-16 (16.3-1.pgdg24.04+1) ...
+Creating new PostgreSQL cluster 16/main ...
+/usr/lib/postgresql/16/bin/initdb -D /var/lib/postgresql/16/main --auth-local peer --auth-host scram-sha-256 --no-instructions
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "C.UTF-8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/16/main ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting default time zone ... Etc/UTC
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... ok
+Setting up postgresql (16+260.pgdg24.04+1) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+root@ip-172-31-5-172:/home/ubuntu#
+root@ip-172-31-5-172:/home/ubuntu#
+root@ip-172-31-5-172:/home/ubuntu# sudo service postgresql status
+● postgresql.service - PostgreSQL RDBMS
+     Loaded: loaded (/usr/lib/systemd/system/postgresql.service; enabled; preset: enabled)
+     Active: active (exited) since Mon 2024-06-17 13:38:29 UTC; 1min 11s ago
+   Main PID: 3610 (code=exited, status=0/SUCCESS)
+        CPU: 2ms
+
+Jun 17 13:38:29 ip-172-31-5-172 systemd[1]: Starting postgresql.service - PostgreSQL RDBMS...
+Jun 17 13:38:29 ip-172-31-5-172 systemd[1]: Finished postgresql.service - PostgreSQL RDBMS.
+root@ip-172-31-5-172:/home/ubuntu# sudo -i -u postgres
+postgres@ip-172-31-5-172:~$ psql
+psql (16.3 (Ubuntu 16.3-1.pgdg24.04+1))
+Type "help" for help.
+
+postgres=# \conninfo
+You are connected to database "postgres" as user "postgres" via socket in "/var/run/postgresql" at port "5432".
+postgres=# \l
+                                                   List of databases
+   Name    |  Owner   | Encoding | Locale Provider | Collate |  Ctype  | ICU Locale | ICU Rules |   Access privileges
+-----------+----------+----------+-----------------+---------+---------+------------+-----------+-----------------------
+ postgres  | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           |
+ template0 | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           | =c/postgres          +
+           |          |          |                 |         |         |            |           | postgres=CTc/postgres
+ template1 | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           | =c/postgres          +
+           |          |          |                 |         |         |            |           | postgres=CTc/postgres
+(3 rows)
+
+postgres=# \du
+                             List of roles
+ Role name |                         Attributes
+-----------+------------------------------------------------------------
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS
+
+postgres=# \q
+postgres@ip-172-31-5-172:~$ psql
+psql (16.3 (Ubuntu 16.3-1.pgdg24.04+1))
+Type "help" for help.
+
+postgres=# \l
+                                                   List of databases
+   Name    |  Owner   | Encoding | Locale Provider | Collate |  Ctype  | ICU Locale | ICU Rules |   Access privileges
+-----------+----------+----------+-----------------+---------+---------+------------+-----------+-----------------------
+ postgres  | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           |
+ template0 | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           | =c/postgres          +
+           |          |          |                 |         |         |            |           | postgres=CTc/postgres
+ template1 | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           | =c/postgres          +
+           |          |          |                 |         |         |            |           | postgres=CTc/postgres
+(3 rows)
+
+postgres=# \password postgres
+Enter new password for user "postgres":
+Enter it again:
+postgres=# \q
+postgres@ip-172-31-5-172:~$ sudo systemctl restart posstgresql
+[sudo] password for postgres:
+Sorry, try again.
+[sudo] password for postgres:
+Sorry, try again.
+[sudo] password for postgres:
+sudo: 3 incorrect password attempts
+postgres@ip-172-31-5-172:~$ exit
+logout
+root@ip-172-31-5-172:/home/ubuntu# sudo systemctl restart postgresql
+root@ip-172-31-5-172:/home/ubuntu# sudo -i -u postgres
+postgres@ip-172-31-5-172:~$ psql
+psql (16.3 (Ubuntu 16.3-1.pgdg24.04+1))
+Type "help" for help.
+
+postgres=# \l
+                                                   List of databases
+   Name    |  Owner   | Encoding | Locale Provider | Collate |  Ctype  | ICU Locale | ICU Rules |   Access privileges
+-----------+----------+----------+-----------------+---------+---------+------------+-----------+-----------------------
+ postgres  | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           |
+ template0 | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           | =c/postgres          +
+           |          |          |                 |         |         |            |           | postgres=CTc/postgres
+ template1 | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           | =c/postgres          +
+           |          |          |                 |         |         |            |           | postgres=CTc/postgres
+(3 rows)
+
+postgres=# \q
+postgres@ip-172-31-5-172:~$ sudo systemctl restart posstgresql
+[sudo] password for postgres:
+Sorry, try again.
+[sudo] password for postgres:
+Sorry, try again.
+[sudo] password for postgres:
+sudo: 3 incorrect password attempts
+postgres@ip-172-31-5-172:~$ sudo systemctl restart postresql
+[sudo] password for postgres:
+Sorry, try again.
+[sudo] password for postgres:
+sudo: 1 incorrect password attempt
+postgres@ip-172-31-5-172:~$ ^C
+postgres@ip-172-31-5-172:~$
+postgres@ip-172-31-5-172:~$
+logout
+root@ip-172-31-5-172:/home/ubuntu#
+root@ip-172-31-5-172:/home/ubuntu#
+root@ip-172-31-5-172:/home/ubuntu#
+root@ip-172-31-5-172:/home/ubuntu#
+root@ip-172-31-5-172:/home/ubuntu#
+root@ip-172-31-5-172:/home/ubuntu#
+
+
+
+
+
+Microsoft Windows [Version 10.0.19045.4529]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Abhishek>ssh -i "C:\Users\Abhishek\Downloads\kp-ab.pem" ubuntu@ec2-15-207-89-76.ap-south-1.compute.amazonaws.com
+Welcome to Ubuntu 24.04 LTS (GNU/Linux 6.8.0-1008-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Jun 17 13:52:22 UTC 2024
+
+  System load:  0.0               Processes:             119
+  Usage of /:   29.5% of 6.71GB   Users logged in:       1
+  Memory usage: 24%               IPv4 address for enX0: 172.31.5.172
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+80 updates can be applied immediately.
+45 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Mon Jun 17 13:36:21 2024 from 152.58.17.107
+Welcome to Ubuntu 24.04 LTS (GNU/Linux 6.8.0-1008-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Jun 17 13:52:22 UTC 2024
+
+  System load:  0.0               Processes:             119
+  Usage of /:   29.5% of 6.71GB   Users logged in:       1
+  Memory usage: 24%               IPv4 address for enX0: 172.31.5.172
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+80 updates can be applied immediately.
+45 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Mon Jun 17 13:36:21 2024 from 152.58.17.107
+ubuntu@ip-172-31-5-172:~$
+ubuntu@ip-172-31-5-172:~$
+ubuntu@ip-172-31-5-172:~$
+ubuntu@ip-172-31-5-172:~$ sudo su
+root@ip-172-31-5-172:/home/ubuntu# sudo apt update
+Hit:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble InRelease
+Hit:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:3 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu noble-security InRelease
+Hit:5 https://apt.postgresql.org/pub/repos/apt noble-pgdg InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+74 packages can be upgraded. Run 'apt list --upgradable' to see them.
+root@ip-172-31-5-172:/home/ubuntu#
+root@ip-172-31-5-172:/home/ubuntu#
+root@ip-172-31-5-172:/home/ubuntu#
+root@ip-172-31-5-172:/home/ubuntu# sudo systemctl restart postgresql
+root@ip-172-31-5-172:/home/ubuntu# sudo service postgresql restart
+root@ip-172-31-5-172:/home/ubuntu# sudo -i -u postgres
+postgres@ip-172-31-5-172:~$ psql
+psql (16.3 (Ubuntu 16.3-1.pgdg24.04+1))
+Type "help" for help.
+
+postgres=# \l
+                                                   List of databases
+   Name    |  Owner   | Encoding | Locale Provider | Collate |  Ctype  | ICU Locale | ICU Rules |   Access privileges
+-----------+----------+----------+-----------------+---------+---------+------------+-----------+-----------------------
+ postgres  | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           |
+ template0 | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           | =c/postgres          +
+           |          |          |                 |         |         |            |           | postgres=CTc/postgres
+ template1 | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |            |           | =c/postgres          +
+           |          |          |                 |         |         |            |           | postgres=CTc/postgres
+(3 rows)
+
+postgres=# \conninfo
+You are connected to database "postgres" as user "postgres" via socket in "/var/run/postgresql" at port "5432".
+postgres=# \password postgres
+Enter new password for user "postgres": client_loop: send disconnect: Connection reset
+
+C:\Users\Abhishek>ssh -i "C:\Users\Abhishek\Downloads\kp-ab.pem" ubuntu@ec2-15-207-89-76.ap-south-1.compute.amazonaws.com
+Welcome to Ubuntu 24.04 LTS (GNU/Linux 6.8.0-1008-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Jun 17 13:55:22 UTC 2024
+
+  System load:  0.0               Processes:             131
+  Usage of /:   29.5% of 6.71GB   Users logged in:       2
+  Memory usage: 25%               IPv4 address for enX0: 172.31.5.172
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+80 updates can be applied immediately.
+45 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Mon Jun 17 13:52:23 2024 from 152.58.17.107
+ubuntu@ip-172-31-5-172:~$
+ubuntu@ip-172-31-5-172:~$
+ubuntu@ip-172-31-5-172:~$ sudo su
+root@ip-172-31-5-172:/home/ubuntu# sudo -i -u postgres
+postgres@ip-172-31-5-172:~$ psql
+psql (16.3 (Ubuntu 16.3-1.pgdg24.04+1))
+Type "help" for help.
+
+postgres=# \password postgres
+Enter new password for user "postgres":
+Enter it again:
+postgres=# sudo systemctl restart postgresql
+postgres-# \q
+postgres@ip-172-31-5-172:~$ sudo systemctl restart postgresql
+[sudo] password for postgres:
+Sorry, try again.
+[sudo] password for postgres:
+Sorry, try again.
+[sudo] password for postgres:
+sudo: 3 incorrect password attempts
+postgres@ip-172-31-5-172:~$ exit
+logout
+root@ip-172-31-5-172:/home/ubuntu# sudo systemctl restart postgresql
+root@ip-172-31-5-172:/home/ubuntu# cd
+root@ip-172-31-5-172:~# cd ./
+.bash_history  .bashrc        .lesshst       .profile       .ssh/          snap/
+root@ip-172-31-5-172:~# ls
+snap
+root@ip-172-31-5-172:~# cd /etc
+root@ip-172-31-5-172:/etc# ls
+ModemManager            e2scrub.conf         libibverbs.d            passwd             ssh
+PackageKit              ec2_version          libnl-3                 passwd-            ssl
+X11                     environment          locale.alias            perl               subgid
+acpi                    ethertypes           locale.conf             pki                subgid-
+adduser.conf            fonts                locale.gen              plymouth           subuid
+alternatives            fstab                localtime               pm                 subuid-
+apparmor                fuse.conf            logcheck                polkit-1           sudo.conf
+apparmor.d              fwupd                login.defs              pollinate          sudo_logsrvd.conf
+apport                  gai.conf             logrotate.conf          postgresql         sudoers
+apt                     gnutls               logrotate.d             postgresql-common  sudoers.d
+bash.bashrc             groff                lsb-release             ppp                supercat
+bash_completion         group                lvm                     profile            sysctl.conf
+bash_completion.d       group-               machine-id              profile.d          sysctl.d
+bindresvport.blacklist  grub.d               magic                   protocols          sysstat
+binfmt.d                gshadow              magic.mime              python3            systemd
+byobu                   gshadow-             manpath.config          python3.12         terminfo
+ca-certificates         gss                  mdadm                   rc0.d              timezone
+ca-certificates.conf    hdparm.conf          mime.types              rc1.d              tmpfiles.d
+chrony                  hibagent-config.cfg  mke2fs.conf             rc2.d              ubuntu-advantage
+cloud                   hibinit-config.cfg   modprobe.d              rc3.d              ucf.conf
+console-setup           host.conf            modules                 rc4.d              udev
+credstore               hostname             modules-load.d          rc5.d              udisks2
+credstore.encrypted     hosts                mtab                    rc6.d              ufw
+cron.d                  hosts.allow          multipath               rcS.d              update-manager
+cron.daily              hosts.deny           multipath.conf          resolv.conf        update-motd.d
+cron.hourly             init.d               nanorc                  rmt                update-notifier
+cron.monthly            initramfs-tools      needrestart             rpc                usb_modeswitch.conf
+cron.weekly             inputrc              netconfig               rsyslog.conf       usb_modeswitch.d
+cron.yearly             iproute2             netplan                 rsyslog.d          vconsole.conf
+crontab                 iscsi                network                 screenrc           vim
+cryptsetup-initramfs    issue                networkd-dispatcher     security           vmware-tools
+crypttab                issue.net            networks                selinux            vtrgb
+dbus-1                  kernel               newt                    sensors.d          wgetrc
+debconf.conf            landscape            nftables.conf           sensors3.conf      xattr.conf
+debian_version          ld.so.cache          nsswitch.conf           services           xdg
+default                 ld.so.conf           opt                     sgml               xml
+deluser.conf            ld.so.conf.d         os-release              shadow             zsh_command_not_found
+depmod.d                ldap                 overlayroot.conf        shadow-
+dhcp                    legal                overlayroot.local.conf  shells
+dhcpcd.conf             libaudit.conf        pam.conf                skel
+dpkg                    libblockdev          pam.d                   sos
+root@ip-172-31-5-172:/etc# cd /postgresql
+bash: cd: /postgresql: No such file or directory
+root@ip-172-31-5-172:/etc# cd /postgresql/
+bash: cd: /postgresql/: No such file or directory
+root@ip-172-31-5-172:/etc# cd ./
+Display all 204 possibilities? (y or n)
+root@ip-172-31-5-172:/etc# cd ./
+root@ip-172-31-5-172:/etc# cd ./postgresql
+root@ip-172-31-5-172:/etc/postgresql# ls
+16
+root@ip-172-31-5-172:/etc/postgresql# cd ./16
+root@ip-172-31-5-172:/etc/postgresql/16# ls
+main
+root@ip-172-31-5-172:/etc/postgresql/16# cd ./main
+root@ip-172-31-5-172:/etc/postgresql/16/main# ls
+conf.d  environment  pg_ctl.conf  pg_hba.conf  pg_ident.conf  postgresql.conf  start.conf
+root@ip-172-31-5-172:/etc/postgresql/16/main# nano postgresql.conf
+root@ip-172-31-5-172:/etc/postgresql/16/main# root@ip-172-31-5-172:/etc/postgresql/16/main# nano pg_hba.conf
+root@ip-172-31-5-172:/etc/postgresql/16/main# nano pg_hba.conf
+root@ip-172-31-5-172:/etc/postgresql/16/main# root@ip-172-31-5-172:/etc/postgresql/16/main# sudo systemctl restart postg
+root@ip-172-31-5-172:/etc/postgresql/16/main#
+root@ip-172-31-5-172:/etc/postgresql/16/main# sudo systemctl restart postgresql
+root@ip-172-31-5-172:/etc/postgresql/16/main# netstat -tuln -p | grep 5432
+Command 'netstat' not found, but can be installed with:
+apt install net-tools
+root@ip-172-31-5-172:/etc/postgresql/16/main# apt install net-tools
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  net-tools
+0 upgraded, 1 newly installed, 0 to remove and 74 not upgraded.
+Need to get 204 kB of archives.
+After this operation, 811 kB of additional disk space will be used.
+Get:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu noble/main amd64 net-tools amd64 2.10-0.1ubuntu4 [204 kB]
+Fetched 204 kB in 0s (11.4 MB/s)
+Selecting previously unselected package net-tools.
+(Reading database ... 74168 files and directories currently installed.)
+Preparing to unpack .../net-tools_2.10-0.1ubuntu4_amd64.deb ...
+Unpacking net-tools (2.10-0.1ubuntu4) ...
+Setting up net-tools (2.10-0.1ubuntu4) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+root@ip-172-31-5-172:/etc/postgresql/16/main# netstat -tuln -p | grep 5432
+tcp        0      0 0.0.0.0:5432            0.0.0.0:*               LISTEN      5318/postgres
+tcp6       0      0 :::5432                 :::*                    LISTEN      5318/postgres
+root@ip-172-31-5-172:/etc/postgresql/16/main# client_loop: send disconnect: Connection reset
+
+C:\Users\Abhishek>xit
+'xit' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\Abhishek>
+C:\Users\Abhishek>
+C:\Users\Abhishek>
+C:\Users\Abhishek>
+C:\Users\Abhishek>
+
