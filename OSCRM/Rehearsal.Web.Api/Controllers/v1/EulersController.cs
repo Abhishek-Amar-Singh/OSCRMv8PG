@@ -44,11 +44,30 @@ namespace Rehearsal.Web.Api.Controllers.v1
             return CreateResponse(200, response);
         }
 
+        /// <summary>
+        /// <p>The prime factors of 13195 are 5, 7, 13 and 29. What is the largest prime factor of the number 600851475143.
+        /// </summary>
+        /// <returns>T</returns>
         [HttpGet]
         [Route("Problem3")]
         public ActionResult Problem3()
         {
             var response = this._eulerService.SolveProblem3();
+
+            return CreateResponse(200, response);
+        }
+
+        /// <summary>
+        /// A palindromic number reads the same both ways.
+        /// The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 x 99.
+        /// Find the largest palindrome made from the product of two 3-digit numbers.
+        /// </summary>
+        /// <returns>T</returns>
+        [HttpGet]
+        [Route("Problem4")]
+        public ActionResult Problem4()
+        {
+            var response = this._eulerService.SolveProblem4();
 
             return CreateResponse(200, response);
         }

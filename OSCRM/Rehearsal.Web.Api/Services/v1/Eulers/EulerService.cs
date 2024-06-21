@@ -1,4 +1,6 @@
-﻿namespace Rehearsal.Web.Api.Services.v1.Eulers
+﻿using System.Runtime.CompilerServices;
+
+namespace Rehearsal.Web.Api.Services.v1.Eulers
 {
     public class EulerService : IEulerService
     {
@@ -6,9 +8,9 @@
         {
             #region ordinary solution
             int s = 0, maxi = 1000, nofIters = 0;
-            for (int i=3; i < maxi; i++)
+            for (int i = 3; i < maxi; i++)
             {
-                if (i%3 == 0 || i%5 == 0)
+                if (i % 3 == 0 || i % 5 == 0)
                 {
                     s += i;
                 }
@@ -18,10 +20,10 @@
 
             #region optimized solution
             int sum = 0, nOfIters = 0, max = 1000;
-            for (int i=1; (3 * i < max) || (5 * i < max); i++)
+            for (int i = 1; (3 * i < max) || (5 * i < max); i++)
             {
                 if (3 * i < max) sum += 3 * i;
-                if ((5 * i < max) && (5*i%3 != 0)) sum += 5 * i;
+                if ((5 * i < max) && (5 * i % 3 != 0)) sum += 5 * i;
                 nOfIters = i;
             }
             #endregion
@@ -38,7 +40,7 @@
             List<int> fibSeries = new();
 
             int f0 = 0, f1 = 1, f = f0 + f1, maxReach = 4000000, sum_even = 0, nOfIters = 0;
-            fibSeries.AddRange(new int[]{ f0, f1, f});
+            fibSeries.AddRange(new int[] { f0, f1, f });
             for (int i = 1; i < maxReach; i++)
             {
                 f0 = f1;
@@ -95,6 +97,39 @@
 
             return new { prime_factors, largest_prime_factor = $"The largest prime factor of {find_pf} is {prime_factors.Last()}." };
             //return new { primes, prime_factors, result, is_eq = result == find_pf};
+        }
+
+        public string SolveProblem4()
+        {
+            int largest2DigitNum = 999, smallest2DigitNum = 100, n = largest2DigitNum;
+            List<int> palindromes = new();
+            Dictionary<int, string> spalindromes = new();
+
+            for (int i = largest2DigitNum; i >= smallest2DigitNum; i--)
+            {
+                if (i == smallest2DigitNum)
+                {
+                    i = largest2DigitNum;
+                    n--;
+                }
+
+                string res = Convert.ToString(n * i), rev_res = string.Empty;
+                char[] arr = res.ToCharArray();
+                for (int j = arr.Length - 1; j >= 0; j--)
+                {
+                    rev_res += arr[j];
+                }
+                if (res == rev_res)
+                {
+                    if(!spalindromes.ContainsKey(int.Parse(rev_res)))
+                    {
+                        //palindromes.Add(int.Parse(rev_res));
+                        spalindromes.Add(int.Parse(rev_res), $"{n} x {i} = {res} ({rev_res})");
+                    }
+                }
+            }
+
+            return $"{spalindromes[spalindromes.Keys.Max()]}";
         }
     }
 }
