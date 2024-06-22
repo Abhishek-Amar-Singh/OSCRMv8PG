@@ -65,9 +65,9 @@ namespace Rehearsal.Web.Api.Controllers.v1
         /// <returns>T</returns>
         [HttpGet]
         [Route("Problem4")]
-        public ActionResult Problem4()
+        public ActionResult Problem4(int n = 1)
         {
-            var response = this._eulerService.SolveProblem4();
+            var response = this._eulerService.SolveProblem4(n);
 
             return CreateResponse(200, response);
         }

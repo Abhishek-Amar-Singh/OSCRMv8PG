@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Shared.Lib.Extensions;
+using System.Runtime.CompilerServices;
 
 namespace Rehearsal.Web.Api.Services.v1.Eulers
 {
@@ -99,13 +100,17 @@ namespace Rehearsal.Web.Api.Services.v1.Eulers
             //return new { primes, prime_factors, result, is_eq = result == find_pf};
         }
 
-        public string SolveProblem4()
+        public string SolveProblem4(int h)
         {
+            if (h > 0)
+            {
+                return "400: Invalid input";
+            }
+
             int largest2DigitNum = 999, smallest2DigitNum = 100, n = largest2DigitNum;
-            List<int> palindromes = new();
             Dictionary<int, string> spalindromes = new();
 
-            for (int i = largest2DigitNum; i >= smallest2DigitNum; i--)
+            for (int i = largest2DigitNum; i >= smallest2DigitNum && n >= smallest2DigitNum; i--)
             {
                 if (i == smallest2DigitNum)
                 {
@@ -113,23 +118,20 @@ namespace Rehearsal.Web.Api.Services.v1.Eulers
                     n--;
                 }
 
-                string res = Convert.ToString(n * i), rev_res = string.Empty;
-                char[] arr = res.ToCharArray();
-                for (int j = arr.Length - 1; j >= 0; j--)
+                var result = Convert.ToString(n * i);
+                var reversed_res = result.ReverseString();
+                if (result == reversed_res)
                 {
-                    rev_res += arr[j];
-                }
-                if (res == rev_res)
-                {
-                    if(!spalindromes.ContainsKey(int.Parse(rev_res)))
+                    int reverse_res = int.Parse(reversed_res);
+                    if (!spalindromes.ContainsKey(reverse_res))
                     {
-                        //palindromes.Add(int.Parse(rev_res));
-                        spalindromes.Add(int.Parse(rev_res), $"{n} x {i} = {res} ({rev_res})");
+                        spalindromes.Add(reverse_res, $"{n} x {i} = {result} ({reverse_res})");
                     }
                 }
             }
+            spalindromes = spalindromes.OrderByDescending(x => x.Key).ToDictionary();
 
-            return $"{spalindromes[spalindromes.Keys.Max()]}";
+            return $"{spalindromes.ElementAt(h - 1)}";
         }
     }
 }

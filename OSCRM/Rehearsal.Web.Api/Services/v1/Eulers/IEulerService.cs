@@ -5,6 +5,6 @@
         dynamic SolveProblem1();
         dynamic SolveProblem2();
         dynamic SolveProblem3();
-        string SolveProblem4();
+        string SolveProblem4(int n);
     }
 }
