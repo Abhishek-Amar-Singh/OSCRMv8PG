@@ -27,6 +27,11 @@ namespace DB.Models.LakeMaster.Insurances
         public decimal surrender_value_integer { get; set; }
         public int? scenario { get; set; }
         public double? accrued_bonus { get; set; }
-
+        public long user_action_id { get; set; } = 339;
+        public decimal? surrender_val_received { get; set; }
+        public decimal? premium_saved { get; set; }
+        public decimal? commission_saved { get; set; }
+        public DateTime? last_updated_at { get; set; }
+        public long? payment_frequency_mode_id { get; set; }
     }
 }

@@ -165,17 +165,17 @@ namespace Rehearsal.Web.Api.Services.v1.Eulers
 
         public string SolveProblem6()
         {
-            double sum_of_squares = 0;
+            int sum_of_squares = 0;
             int square_of_sum = 0;
             for (int i = 1; i <= 100; i++)
             {
-                sum_of_squares += Math.Pow(i, 2);
+                sum_of_squares += (int)Math.Pow(i, 2);
                 square_of_sum += i;
             }
 
             square_of_sum = (int)Math.Pow(square_of_sum, 2);
 
-            return $"sum_of_squares:: {sum_of_squares}, square_of_sum:: {(int)square_of_sum} and difference:: {square_of_sum - sum_of_squares}";
+            return $"sum_of_squares:: {sum_of_squares}, square_of_sum:: {square_of_sum} and difference:: {square_of_sum - sum_of_squares}";
         }
     }
 }

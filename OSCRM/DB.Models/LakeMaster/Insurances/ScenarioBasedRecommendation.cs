@@ -19,5 +19,6 @@ namespace DB.Models.LakeMaster.Insurances
         public string? based_on_suggested { get; set; }
         public string? remark { get; set; }
         public string comment { get; set; } = null!;
+        public long? payment_frequency_mode_id { get; set; }
     }
 }

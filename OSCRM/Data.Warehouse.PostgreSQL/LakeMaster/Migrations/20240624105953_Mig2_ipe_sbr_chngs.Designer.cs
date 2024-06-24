@@ -3,6 +3,7 @@ using System;
 using Data.Warehouse.PostgreSQL.LakeMaster.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Warehouse.PostgreSQL.LakeMaster.Migrations
 {
     [DbContext(typeof(LakeMasterDbContext))]
-    partial class LakeMasterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240624105953_Mig2_ipe_sbr_chngs")]
+    partial class Mig2_ipe_sbr_chngs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
