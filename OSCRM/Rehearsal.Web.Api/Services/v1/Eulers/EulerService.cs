@@ -133,5 +133,49 @@ namespace Rehearsal.Web.Api.Services.v1.Eulers
 
             return $"{spalindromes.ElementAt(h - 1)}";
         }
+
+        public string SolveProblem5(int nth_element)
+        {
+            int from = 1, to = 20, i = 1, h = 0;
+            bool status = false;
+            do
+            {
+                for (int j = from; j <= to; j++)
+                {
+                    if (i % j == 0)
+                    {
+                        if (j == to)
+                        {
+                            h++;
+                            if (h == nth_element)
+                            {
+                                status = true;
+                                break;
+                            }
+                        }
+                    }
+                    else break;
+                }
+
+                i++;
+            } while (status == false);
+
+            return $"The smallest number which is divisible by numbers (1-20) is {i-1}.";
+        }
+
+        public string SolveProblem6()
+        {
+            double sum_of_squares = 0;
+            int square_of_sum = 0;
+            for (int i = 1; i <= 100; i++)
+            {
+                sum_of_squares += Math.Pow(i, 2);
+                square_of_sum += i;
+            }
+
+            square_of_sum = (int)Math.Pow(square_of_sum, 2);
+
+            return $"sum_of_squares:: {sum_of_squares}, square_of_sum:: {(int)square_of_sum} and difference:: {square_of_sum - sum_of_squares}";
+        }
     }
 }

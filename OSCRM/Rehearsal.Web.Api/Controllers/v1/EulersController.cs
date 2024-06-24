@@ -3,6 +3,7 @@ using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Rehearsal.Web.Api.Services.v1.Eulers;
 using Shared.Lib.AspNetCore.Mvc;
+using System;
 
 namespace Rehearsal.Web.Api.Controllers.v1
 {
@@ -65,9 +66,33 @@ namespace Rehearsal.Web.Api.Controllers.v1
         /// <returns>T</returns>
         [HttpGet]
         [Route("Problem4")]
-        public ActionResult Problem4(int n = 1)
+        public ActionResult Problem4(int nth_element = 1)
         {
-            var response = this._eulerService.SolveProblem4(n);
+            var response = this._eulerService.SolveProblem4(nth_element);
+
+            return CreateResponse(200, response);
+        }
+
+        /// <summary>
+        /// 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+        /// What is the smallest positive number that is evenly divisible divisible with no remainder by all of the numbers from 1 to 20.
+        /// </summary>
+        /// <param name="nth_element"></param>
+        /// <returns>T</returns>
+        [HttpGet]
+        [Route("Problem5")]
+        public ActionResult Problem5(int nth_element = 1)
+        {
+            var response = this._eulerService.SolveProblem5(nth_element);
+
+            return CreateResponse(200, response);
+        }
+
+        [HttpGet]
+        [Route("Problem6")]
+        public ActionResult Problem6()
+        {
+            var response = this._eulerService.SolveProblem6();
 
             return CreateResponse(200, response);
         }
