@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Rehearsal.Web.Api.Services.v1.Eulers;
 using Shared.Lib.AspNetCore.Mvc;
 using System;
+using System.Security.Policy;
 
 namespace Rehearsal.Web.Api.Controllers.v1
 {
@@ -88,6 +89,13 @@ namespace Rehearsal.Web.Api.Controllers.v1
             return CreateResponse(200, response);
         }
 
+        /// <summary>
+        /// The sum of the squares of the first ten natural numbers is, 1^2 + 2^2 + ... + 10^2 = 385
+        /// The square of the sum of the first ten natural numbers is, (1 + 2 + ... + 10)^2 = 55^2 = 3025
+        /// Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 - 385 = 2640
+        /// Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum
+        /// </summary>
+        /// <returns>T</returns>
         [HttpGet]
         [Route("Problem6")]
         public ActionResult Problem6()
