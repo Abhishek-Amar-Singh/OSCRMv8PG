@@ -8,5 +8,7 @@
         string SolveProblem4(int nth_element);
         string SolveProblem5(int nth_element);
         string SolveProblem6();
+        string SolveProblem7(int nth_prime);
+        dynamic SolveProblem8(int adj);
     }
 }

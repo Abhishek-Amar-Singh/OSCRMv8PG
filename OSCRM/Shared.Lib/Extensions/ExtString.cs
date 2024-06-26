@@ -12,7 +12,7 @@ namespace Shared.Lib.Extensions
             char.ToUpper(input[0]) + input.Substring(1).ToLower();
         public static string ToUpperCase(this string input) =>
             new CultureInfo("en-US", false).TextInfo.ToUpper(input);
-
+        
         public static string ReverseString(this string input)
         {
             if (input is null || input.Trim() == string.Empty) return string.Empty;

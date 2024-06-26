@@ -104,6 +104,35 @@ namespace Rehearsal.Web.Api.Controllers.v1
 
             return CreateResponse(200, response);
         }
+        
+        /// <summary>
+        /// By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+        /// What is the 10001st prime number
+        /// </summary>
+        /// <param name="nth_prime"></param>
+        /// <returns>T</returns>
+        [HttpGet]
+        [Route("Problem7")]
+        public ActionResult Problem7(int nth_prime=10001)
+        {
+            var response = this._eulerService.SolveProblem7(nth_prime);
+
+            return CreateResponse(200, response);
+        }
+        /// <summary>
+        /// The four adjacent digits in the 1000-digit number that have the greatest product are 9 x 9 x 8 x 9 = 832
+        /// Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
+        /// </summary>
+        /// <param name="adj"></param>
+        /// <returns>T</returns>
+        [HttpGet]
+        [Route("Problem8")]
+        public ActionResult Problem8(int adj=4)
+        {
+            var response = this._eulerService.SolveProblem8(adj);
+
+            return CreateResponse(200, response);
+        }
     }
 }
  
