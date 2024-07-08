@@ -3,8 +3,6 @@ using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Rehearsal.Web.Api.Services.v1.Eulers;
 using Shared.Lib.AspNetCore.Mvc;
-using System;
-using System.Security.Policy;
 
 namespace Rehearsal.Web.Api.Controllers.v1
 {

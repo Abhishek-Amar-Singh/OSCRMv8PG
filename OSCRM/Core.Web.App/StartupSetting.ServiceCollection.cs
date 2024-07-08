@@ -10,6 +10,7 @@ using Asp.Versioning;
 using OSCRMV1Services = OSCRM.Web.Api.Services.v1;
 using OSCRMStorages = OSCRM.Web.Api.Storages;
 using RehearsalV1Services = Rehearsal.Web.Api.Services.v1;
+using Shared.Lib.AspNetCore.Sessions;
 
 
 public static partial class StartupSetting
@@ -33,6 +34,8 @@ public static partial class StartupSetting
         AddResponseCompression(services);
 
         AddApiVersioning(services);
+
+        AddSession(services);
 
         return services;
     }
@@ -137,6 +140,16 @@ public static partial class StartupSetting
         {
             options.GroupNameFormat = "'v'VVV";
             options.SubstituteApiVersionInUrl = true;
+        });
+    }
+
+    private static void AddSession(IServiceCollection services)
+    {
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddSingleton<ISessionManager, SessionManager>();
+
+        services.AddSession(options => {
+            options.IdleTimeout = TimeSpan.FromSeconds(15);
         });
     }
 }

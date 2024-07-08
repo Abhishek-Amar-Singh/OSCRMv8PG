@@ -16,6 +16,8 @@ public static partial class StartupSetting
         RunAutomaticMigration<RehearsalDbContext>(app);
         RunAutomaticMigration<LakeMasterDbContext>(app);
 
+        UseSession(app);
+
         return app;
     }
 
@@ -37,4 +39,6 @@ public static partial class StartupSetting
         using var context = scope?.ServiceProvider.GetRequiredService<T>();
         context?.Database.Migrate();
     }
+
+    private static void UseSession(WebApplication app) => app.UseSession();
 }
