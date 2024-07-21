@@ -11,6 +11,7 @@ using OSCRMV1Services = OSCRM.Web.Api.Services.v1;
 using OSCRMStorages = OSCRM.Web.Api.Storages;
 using RehearsalV1Services = Rehearsal.Web.Api.Services.v1;
 using Shared.Lib.AspNetCore.Sessions;
+using Shared.Lib.AppLogs;
 
 
 public static partial class StartupSetting
@@ -36,6 +37,8 @@ public static partial class StartupSetting
         AddApiVersioning(services);
 
         AddSession(services);
+
+        AddAppLogger(services);
 
         return services;
     }
@@ -130,8 +133,8 @@ public static partial class StartupSetting
     {
         services.AddApiVersioning(o =>
         {
-            o.AssumeDefaultVersionWhenUnspecified = true;
             o.DefaultApiVersion = new ApiVersion(1, 0);
+            o.AssumeDefaultVersionWhenUnspecified = true;
             o.ReportApiVersions = true;
             o.ApiVersionReader = ApiVersionReader.Combine(
                 new UrlSegmentApiVersionReader(),
@@ -152,4 +155,7 @@ public static partial class StartupSetting
             options.IdleTimeout = TimeSpan.FromSeconds(15);
         });
     }
+
+    private static void AddAppLogger(IServiceCollection services) =>
+        services.AddSingleton<AppLogger>();
 }

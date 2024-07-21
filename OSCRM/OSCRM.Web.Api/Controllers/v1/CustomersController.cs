@@ -6,12 +6,14 @@ using OSCRM.Web.Api.Models.Customers;
 using OSCRM.Web.Api.Models.Customers.Exceptions;
 using OSCRM.Web.Api.Services.v1.Customers;
 using Shared.Lib.AspNetCore.Mvc;
+using Shared.Lib.AppLogs;
 
 namespace OSCRM.Web.Api.Controllers.v1
 {
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [ApiVersion("1.0")]
+    [ServiceFilter(typeof(AppLogger))]
     public class CustomersController : ApiControllerBase
     {
         private readonly ICustomerService _customerService;
