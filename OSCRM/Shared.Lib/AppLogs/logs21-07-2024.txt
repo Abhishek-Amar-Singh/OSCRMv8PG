@@ -10,3 +10,5 @@ StartTime::21-07-2024 15:16:37, ControllerName::Customers, ActionName::GetAllCus
 StartTime::21-07-2024 15:16:43, ControllerName::Customers, ActionName::PostCustomer, EndTime::21-07-2024 15:16:44, TotalTimeInSeconds::1.3850266
 StartTime::21-07-2024 16:03:04, ControllerName::Customers, ActionName::GetAllCustomers, EndTime::21-07-2024 16:03:04, TotalTimeInSeconds::0.2226305
 StartTime::21-07-2024 16:05:11, ControllerName::Customers, ActionName::PostCustomer, EndTime::21-07-2024 16:05:12, TotalTimeInSeconds::1.2532728
+StartTime::21-07-2024 18:19:24, ControllerName::Customers, ActionName::PostCustomer, EndTime::21-07-2024 18:19:26, TotalTimeInSeconds::2.3224314
+StartTime::21-07-2024 18:19:36, ControllerName::Customers, ActionName::GetAllCustomers, EndTime::21-07-2024 18:19:36, TotalTimeInSeconds::0.045618
