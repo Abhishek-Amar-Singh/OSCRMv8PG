@@ -111,6 +111,7 @@ public static partial class StartupSetting
     {
         services.AddScoped<OSCRMV1Services.Customers.ICustomerService, OSCRMV1Services.Customers.CustomerService>();
         services.AddScoped<RehearsalV1Services.Eulers.IEulerService, RehearsalV1Services.Eulers.EulerService>();
+        services.AddScoped<RehearsalV1Services.Items.IItemService, RehearsalV1Services.Items.ItemService>();
     }
 
     private static void AddRepositories(IServiceCollection services)
