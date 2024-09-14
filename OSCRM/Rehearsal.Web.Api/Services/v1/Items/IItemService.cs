@@ -6,5 +6,6 @@
         dynamic SpreadOperator();
         string MinimumNullStatement();
         IDictionary<string, dynamic> JsonNode_JsonArray();
+        IEnumerable<string> RandomShuffle();
     }
 }

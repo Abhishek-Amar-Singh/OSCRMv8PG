@@ -58,5 +58,16 @@ namespace Rehearsal.Web.Api.Controllers.v1
             return CreateResponse(200, response);
         }
         #endregion
+
+        #region random-shuffle
+        [HttpGet]
+        [Route("random-shuffle")]
+        public ActionResult RandomShuffle()
+        {
+            var response = this._itemService.RandomShuffle();
+
+            return CreateResponse(200, response);
+        }
+        #endregion
     }
 }

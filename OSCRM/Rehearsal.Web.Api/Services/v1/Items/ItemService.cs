@@ -100,6 +100,24 @@ namespace Rehearsal.Web.Api.Services.v1.Items
 
         }
 
+        public IEnumerable<string> RandomShuffle()
+        {
+            string[] musicians =
+            {
+                "Lucky Ali",
+                "Mohit Chauhan",
+                "Jagjit Singh",
+                "Vishal Mishra",
+                "Abhijit Sawant",
+                "Arijit Singh",
+                "Atif Aslam",
+                "Kishore Kumar",
+                "Papon"
+            };
 
+            Random.Shared.Shuffle(musicians);
+
+            return musicians;
+        }
     }
 }
