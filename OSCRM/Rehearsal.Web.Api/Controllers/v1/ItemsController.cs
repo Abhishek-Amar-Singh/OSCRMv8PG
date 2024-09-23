@@ -1,8 +1,13 @@
 ﻿
 
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Rehearsal.Web.Api.Services.v1.Items;
 using Shared.Lib.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Threading.Channels;
+using System.Collections.Frozen;
+using System.Threading;
 
 namespace Rehearsal.Web.Api.Controllers.v1
 {
@@ -65,6 +70,38 @@ namespace Rehearsal.Web.Api.Controllers.v1
         public ActionResult RandomShuffle()
         {
             var response = this._itemService.RandomShuffle();
+
+            return CreateResponse(200, response);
+        }
+        #endregion
+
+        #region frozen-dictionary
+        // Advantages
+        // - High Performance: Provides high performance in lookup operations after the dictionary is frozen.
+        // - Stability: Once the dictionary is frozen, it cannot be modified, ensuring data stability.
+        // Disadvantages
+        // - Immutability after Freezing: Once frozen, no modifications can be made.
+        // - Specific Use Case: It is only useful in scenarios where no frequent changes are required after the dictionary is created.
+        [HttpGet]
+        [Route("frozen-dictionary")]
+        public ActionResult FrozenDictCollection()
+        {
+            var response = this._itemService.FrozenDictCollection();
+
+            return CreateResponse(200, response);
+        }
+        #endregion
+
+        #region frozen-set
+        // Why Use Frozenset?
+        // - Frozenset ensures that your collection of items remains constant throughout the lifecycle of your application,
+        // providing stability and predictability. This is particularly useful in multi-threaded applications where data
+        // consistency is important.
+        [HttpGet]
+        [Route("frozen-set")]
+        public ActionResult FrozenSetCollection()
+        {
+            var response = this._itemService.FrozenSetCollection();
 
             return CreateResponse(200, response);
         }

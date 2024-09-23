@@ -1,5 +1,6 @@
 ﻿
 using System.Text.Json.Nodes;//JsonNode, JsonArray
+using System.Collections.Frozen;//FrozenDictionary
 
 namespace Rehearsal.Web.Api.Services.v1.Items
 {
@@ -118,6 +119,33 @@ namespace Rehearsal.Web.Api.Services.v1.Items
             Random.Shared.Shuffle(musicians);
 
             return musicians;
+        }
+
+
+        public FrozenDictionary<int, string> FrozenDictCollection()
+        {
+            var frozenDict = new Dictionary<int, string>()
+                    {
+                        {2001, "The Fast and the Furious" },
+                        {2003, "2 Fast 2 Furious" },
+                        {2006, "The Fast and the Furious: Tokyo Drift" },
+                        {2009, "Fast & Furious" },
+                        {2011, "Fast Five" },
+                        {2013, "Fast & Furious 6" },
+                        {2015, "Furious 7" },
+                        {2017, "The Fate of the Furious" },
+                        {2021, "F9" },
+                        {2023, "Fast X"}
+                    }.ToFrozenDictionary();
+
+            return frozenDict;
+        }
+
+        public FrozenSet<int> FrozenSetCollection()
+        {
+            var frozenSet = new List<int>() { 1, 2, 3, 4, 5, 100, 200, 100 }.ToFrozenSet();
+
+            return frozenSet;
         }
     }
 }
