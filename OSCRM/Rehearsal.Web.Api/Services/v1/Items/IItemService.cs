@@ -11,5 +11,6 @@ namespace Rehearsal.Web.Api.Services.v1.Items
         IEnumerable<string> RandomShuffle();
         FrozenDictionary<int, string> FrozenDictCollection();
         FrozenSet<int> FrozenSetCollection();
+        bool Foo(string parameter);
     }
 }

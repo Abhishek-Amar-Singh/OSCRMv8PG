@@ -147,5 +147,35 @@ namespace Rehearsal.Web.Api.Services.v1.Items
 
             return frozenSet;
         }
+
+        #region throw-and-throwEx
+        public bool Foo(string parameter)
+        {
+            try
+            {
+                if (!new[] { "throw", "throwEx" }.Contains(parameter))
+                {
+                    throw new Exception("Only throw and throwEx parameters are allowed.");
+                }
+
+                return Bar();
+            }
+            catch (Exception e)
+            {
+                if (parameter == "throw")
+                {
+                    throw;
+                }
+                else
+                {
+                    throw e;
+                }
+            }
+        }
+        private bool Bar() =>
+            throw new Exception("Exception occurs in Rehearsal.Web.Api.Services.ValueService.Bar()");
+        #endregion
+
+
     }
 }

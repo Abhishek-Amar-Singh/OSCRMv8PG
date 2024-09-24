@@ -1,13 +1,6 @@
-﻿
-
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Rehearsal.Web.Api.Services.v1.Items;
 using Shared.Lib.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Threading.Channels;
-using System.Collections.Frozen;
-using System.Threading;
 
 namespace Rehearsal.Web.Api.Controllers.v1
 {
@@ -106,5 +99,25 @@ namespace Rehearsal.Web.Api.Controllers.v1
             return CreateResponse(200, response);
         }
         #endregion
+
+        #region throw-and-throwEx
+        [HttpGet]
+        [Route("throw-and-throwEx")]
+        public ActionResult ThrowAndThrowEx(string parameter)
+        {
+            try
+            {
+                var response = this._itemService.Foo(parameter);
+
+                return CreateResponse(200, (object)response);//--since bool is struct so generic type should be of reference type.
+            }
+            catch (Exception ex)
+            {
+                return CreateResponse(400, ex);
+            }
+        }
+        #endregion
+
+
     }
 }
