@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Rehearsal\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Shared.Lib\Shared.Lib.csproj" />
   </ItemGroup>
 
