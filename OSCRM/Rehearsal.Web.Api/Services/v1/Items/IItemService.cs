@@ -1,4 +1,5 @@
 ﻿using System.Collections.Frozen;
+using static Rehearsal.Web.Api.Services.v1.Items.ItemService;
 
 namespace Rehearsal.Web.Api.Services.v1.Items
 {
@@ -12,5 +13,8 @@ namespace Rehearsal.Web.Api.Services.v1.Items
         FrozenDictionary<int, string> FrozenDictCollection();
         FrozenSet<int> FrozenSetCollection();
         bool Foo(string parameter);
+        string RelationalPattern1(float score);
+        string PropertyPatternMatching1();
+        AggregatedData[]? LINQMethodAggregate1();
     }
 }

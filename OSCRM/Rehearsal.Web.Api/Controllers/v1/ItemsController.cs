@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using Rehearsal.Web.Api.Services.v1.Items;
 using Shared.Lib.AspNetCore.Mvc;
 
@@ -118,6 +119,38 @@ namespace Rehearsal.Web.Api.Controllers.v1
         }
         #endregion
 
+        #region relational-pattern-1
+        [HttpGet]
+        [Route("relational-pattern-1")]
+        public ActionResult RelationalPattern1(float score)
+        {
+            var response = this._itemService.RelationalPattern1(score);
+
+            return CreateResponse(200, response);
+        }
+        #endregion
+        
+        #region property-pattern-matching-1
+        [HttpGet]
+        [Route("property-pattern-matching-1")]
+        public ActionResult PropertyPatternMatching1()
+        {
+            var response = this._itemService.PropertyPatternMatching1();
+
+            return CreateResponse(200, response);
+        }
+        #endregion
+
+        #region linq-method-aggregate-1
+        [HttpGet]
+        [Route("linq-method-aggregate-1")]
+        public ActionResult LINQMethodAggregate1()
+        {
+            var response = this._itemService.LINQMethodAggregate1();
+
+            return CreateResponse(200, response);
+        }
+        #endregion
 
     }
 }

@@ -176,6 +176,79 @@ namespace Rehearsal.Web.Api.Services.v1.Items
             throw new Exception("Exception occurs in Rehearsal.Web.Api.Services.ValueService.Bar()");
         #endregion
 
+        public string RelationalPattern1(float score)
+        {
+            if (score is >= 35 and <= 100)
+            {
+                return "Passed the exam.";
+            }
+            else if (score is >= 0 and <=34)
+            {
+                return "Failed the exam.";
+            }
+            else
+            {
+                return "Invalid score.";
+            }
+           
+        }
 
+        #region property-pattern-matching-1
+        class Person
+        {
+            public string name { get; set; } = null!;
+            public Location? location { get; set; }
+        }
+        class Location
+        {
+            public string? country { get; set; }
+            public string? city { get; set; }
+        }
+        public string PropertyPatternMatching1()
+        {
+            Person person = new()
+            {
+                name = "Doraemon",
+                location = new() { country = "Japan", city = "Tokyo" }
+            };
+
+            return (person is { name: "Doraemon", location.country: "Japan" }) ? "It's me." : "It's not me.";
+        }
+        #endregion
+
+        #region linq-method-aggregate-1
+        public class AggregatedData
+        {
+            public string category { get; set; } = null!;
+            public int amount_sum { get; set; }
+        }
+
+        public AggregatedData[]? LINQMethodAggregate1()
+        {
+            (string category, int amount)[] data =
+            {
+                ("A", 2),
+                ("B", 3),
+                ("A", 10),
+                ("B", 58),
+                ("C", 72),
+            };
+
+            var aggregatedData = data
+                .GroupBy(d => d.category)
+                .Select(g => new AggregatedData { category = g.Key, amount_sum = g.Sum(d => d.amount)})
+                .ToArray();
+
+            // .NET 9
+            //var aggregatedData =
+            //    data.AggregateBy(
+            //        keySelector: entry => entry.Category,
+            //        seed: 0,
+            //        (totalLength, currentItem) => totalLength + currentItem.amount
+            //    );
+
+            return aggregatedData;
+        }
+        #endregion
     }
 }
