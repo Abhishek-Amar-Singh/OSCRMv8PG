@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration.EnvironmentVariables;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using Rehearsal.Web.Api.Services.v1.Items;
 using Shared.Lib.AspNetCore.Mvc;
 
@@ -151,6 +151,18 @@ namespace Rehearsal.Web.Api.Controllers.v1
             return CreateResponse(200, response);
         }
         #endregion
+
+        #region product-builder-pattern
+        [HttpGet]
+        [Route("product-builder-pattern")]
+        public ActionResult ProductBuilderPattern()
+        {
+            var response = this._itemService.ProductBuilderPattern();
+
+            return CreateResponse(200, response);
+        }
+        #endregion
+
 
     }
 }

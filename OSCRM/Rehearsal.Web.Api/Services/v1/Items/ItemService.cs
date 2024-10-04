@@ -250,5 +250,51 @@ namespace Rehearsal.Web.Api.Services.v1.Items
             return aggregatedData;
         }
         #endregion
+
+        #region product-builder-pattern
+        public class Product
+        {
+            public double price { get; set; }
+            public bool is_discounted { get; set; }
+        }
+        public class ProductBuilder()
+        {
+            private Product _product = new Product();
+
+            public ProductBuilder WithPrice(double price)
+            {
+                _product.price = price;
+                return this;
+            }
+            public ProductBuilder IsDiscounted(bool is_discounted)
+            {
+
+                _product.is_discounted = is_discounted;
+                return this;
+            }
+
+            public Product Build() => _product;
+
+        }
+        public dynamic ProductBuilderPattern()
+        {
+            // first way is with builder pattern
+            var product = new ProductBuilder()
+                .WithPrice(804.35)
+                .IsDiscounted(false)
+                .Build();
+
+            // second way is without builder pattern
+            var prod = new Product { price = 804.35, is_discounted = true };
+
+            return new
+            {
+                with_builder = CalculateDiscountedProductPrice(product),
+                without_builder = CalculateDiscountedProductPrice(prod)
+            };
+        }
+        private double CalculateDiscountedProductPrice(Product product) =>
+            (product.is_discounted) ? product.price - product.price * 0.05 : product.price;
+        #endregion
     }
 }

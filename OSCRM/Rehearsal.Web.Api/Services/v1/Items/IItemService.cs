@@ -1,4 +1,5 @@
-﻿using System.Collections.Frozen;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Frozen;
 using static Rehearsal.Web.Api.Services.v1.Items.ItemService;
 
 namespace Rehearsal.Web.Api.Services.v1.Items
@@ -16,5 +17,6 @@ namespace Rehearsal.Web.Api.Services.v1.Items
         string RelationalPattern1(float score);
         string PropertyPatternMatching1();
         AggregatedData[]? LINQMethodAggregate1();
+        dynamic ProductBuilderPattern();
     }
 }
