@@ -18,5 +18,6 @@ namespace Rehearsal.Web.Api.Services.v1.Items
         string PropertyPatternMatching1();
         AggregatedData[]? LINQMethodAggregate1();
         dynamic ProductBuilderPattern();
+        async ValueTask<dynamic> GetApi(long id);
     }
 }

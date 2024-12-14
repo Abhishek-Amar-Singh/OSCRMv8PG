@@ -163,6 +163,15 @@ namespace Rehearsal.Web.Api.Controllers.v1
         }
         #endregion
 
+        #region consume-3rd-party-get-api
+        [HttpGet]
+        [Route("/api/get-api")]
+        public async ValueTask<ActionResult> GetApi(long id)
+        {
+            var response = await this._itemService.GetApi(id);
 
+            return CreateResponse(200, response);
+        }
+        #endregion
     }
 }

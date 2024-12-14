@@ -6,6 +6,11 @@ namespace Rehearsal.Web.Api.Services.v1.Items
 {
     public class ItemService : IItemService
     {
+        private readonly  HttpClient _httpClient;
+
+        public ItemService(HttpClient _httpClient) =>
+            this._httpClient = _httpClient;
+
         public IEnumerable<string[]> Random_Yield()
         {
             string[] musicians =
@@ -296,5 +301,12 @@ namespace Rehearsal.Web.Api.Services.v1.Items
         private double CalculateDiscountedProductPrice(Product product) =>
             (product.is_discounted) ? product.price - product.price * 0.05 : product.price;
         #endregion
+
+        async ValueTask<dynamic> GetApi(long id)
+        {
+            var response = await _httpClient.GetAsync($"https://jsonplaceholder.typicode.com/posts/{id}");
+
+
+        }
     }
 }
